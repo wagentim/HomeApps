@@ -1,0 +1,21 @@
+@CHARSET "utf8";
+
+.login_block {
+	width: 500px;
+	height: 300px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+h2 {
+	font-weight: bold;
+}
+
+hr {
+	border-color: #0099FF;
+	height: 2px;
+}

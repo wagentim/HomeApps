@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+.container {
+	margin-top: 5px;
+}
+
+.list-group {
+	max-height: 400px;
+	overflow: auto;
+}
+
+.edit {
+	max-height: 400px;
+}

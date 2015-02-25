@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+*
+{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+button
+{
+	width: 90px;
+}
+
+font-families
+{
+	"Microsoft YaHei", "微软雅黑", "SimSun", "宋体";
+}
