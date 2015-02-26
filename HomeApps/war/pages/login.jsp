@@ -24,21 +24,20 @@
 </head>
 <body>
 <%
-    final String TAG_USER_NAME = Constants.USER_NAME;
+	final String TAG_USER_NAME = Constants.USER_NAME;
 	final String TAG_PASSWORD = Constants.PASSWORD;
 
 	final String userName = request.getParameter(TAG_USER_NAME);
 	final String password = request.getParameter(TAG_PASSWORD);
 
-	if (!Validator.isNullOrEmpty(userName)
-			&& !Validator.isNullOrEmpty(password))
+	if (!Validator.isNullOrEmpty(userName) && !Validator.isNullOrEmpty(password))
 	{
 		String md5 = Auth.getMD5Encode(userName, password);
 		DataManager.INSTANE.CACHE_DATA().addNewAuth(md5);
 		HttpSession newSession = request.getSession(true);
 		newSession.setAttribute(Constants.AUTH, md5);
 		newSession.setMaxInactiveInterval(Auth.MAX_SESSION_TIME_OUT);
-		response.sendRedirect("/pages/buymanager/usereditor.jsp");
+		request.getRequestDispatcher("/pages/buymanager/usereditor.jsp").forward(request, response);
 	}
 %>
 <div class="login_block">

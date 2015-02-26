@@ -4,10 +4,10 @@ package cn.wagentim.homeapps.entities.managers;
 public enum DataManager
 {
     INSTANE;
-    private static final CustomerManager cmg = new CustomerManager();
+    private static final DBDataManager cmg = new DBDataManager();
     private static final CachedDataManager cdm = new CachedDataManager();
 
-    public CustomerManager CUSTOMER()
+    public DBDataManager DB_DATA()
     {
         return cmg;
     }

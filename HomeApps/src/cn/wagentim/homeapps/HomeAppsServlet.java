@@ -2,6 +2,7 @@ package cn.wagentim.homeapps;
 
 import java.io.IOException;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
 import cn.wagentim.homeapps.auth.Auth;
@@ -15,11 +16,23 @@ public class HomeAppsServlet extends HttpServlet
 	{
 		if( Auth.isSessionAvailable(request) )
 		{
-			response.getWriter().print("ok");
+			try
+			{
+				request.getRequestDispatcher("/pages/buymanager/usereditor.jsp").forward(request, response);
+			} catch (ServletException e)
+			{
+				e.printStackTrace();
+			}
 		}
 		else
 		{
-			response.sendRedirect("/pages/login.jsp");
+			try
+			{
+				request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
+			} catch (ServletException e)
+			{
+				e.printStackTrace();
+			}
 		}
 	}
 }
