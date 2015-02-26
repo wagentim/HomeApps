@@ -14,4 +14,9 @@ public final class CachedDataManager
             currentAuths.add(auth);
         }
     }
+
+	public boolean isAuthAvailable(String md5)
+	{
+		return currentAuths.contains(md5);
+	}
 }

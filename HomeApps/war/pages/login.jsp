@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ page import="cn.wagentim.homeapps.utils.*, cn.wagentim.homeapps.entities.managers.*" %>
+<%@ page import="cn.wagentim.homeapps.auth.*, cn.wagentim.homeapps.entities.managers.*, cn.wagentim.homeapps.utils.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -37,7 +37,7 @@
 		HttpSession newSession = request.getSession(true);
 		newSession.setAttribute(Constants.AUTH, md5);
 		newSession.setMaxInactiveInterval(Auth.MAX_SESSION_TIME_OUT);
-		request.getRequestDispatcher("/pages/buymanager/usereditor.jsp").forward(request, response);
+		response.sendRedirect("/pages/buymanager/usereditor.jsp");
 	}
 %>
 <div class="login_block">

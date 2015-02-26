@@ -14,25 +14,37 @@ public class HomeAppsServlet extends HttpServlet
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException
 	{
+		doLoginCheck(request, response);
+	}
+	
+	private void doLoginCheck(HttpServletRequest request, HttpServletResponse response)
+	{
 		if( Auth.isSessionAvailable(request) )
 		{
-			try
-			{
-				request.getRequestDispatcher("/pages/buymanager/usereditor.jsp").forward(request, response);
-			} catch (ServletException e)
-			{
-				e.printStackTrace();
-			}
+				try
+				{
+					response.sendRedirect("/pages/buymanager/usereditor.jsp");
+				} catch (IOException e)
+				{
+					e.printStackTrace();
+				}
 		}
 		else
 		{
 			try
 			{
-				request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
-			} catch (ServletException e)
+				response.sendRedirect("/pages/login.jsp");
+			} catch (IOException e)
 			{
 				e.printStackTrace();
 			}
 		}
+		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException
+	{
+		doLoginCheck(request, response);
 	}
 }

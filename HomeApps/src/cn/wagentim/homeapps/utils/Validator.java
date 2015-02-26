@@ -1,6 +1,7 @@
 package cn.wagentim.homeapps.utils;
 
 
+
 public final class Validator
 {
 	public static boolean isNullOrEmpty(final CharSequence s)

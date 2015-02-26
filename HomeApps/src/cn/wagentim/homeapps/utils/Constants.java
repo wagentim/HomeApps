@@ -39,7 +39,7 @@ public interface Constants
 	public static final String CUSTOMER_UID = "uid";
 
 	// 	--------------- Entity Constants ---------------
-	public static final String PERSISTENCE_UNIT_NAME = "transactions-optional";
+	public static final String PERSISTENCE_UNIT_NAME = "google";
 
 	//  --------------- Parser Constants ---------------
 	public static final String OPERATION = "opt";
