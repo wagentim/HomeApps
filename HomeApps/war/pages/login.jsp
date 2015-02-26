@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ page import="cn.wagentim.homeapps.utils.*" %>
+<%@ page import="cn.wagentim.homeapps.utils.*, cn.wagentim.homeapps.entities.managers.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,7 +24,7 @@
 </head>
 <body>
 <%
-	final String TAG_USER_NAME = Constants.USER_NAME;
+    final String TAG_USER_NAME = Constants.USER_NAME;
 	final String TAG_PASSWORD = Constants.PASSWORD;
 
 	final String userName = request.getParameter(TAG_USER_NAME);
@@ -34,10 +34,11 @@
 			&& !Validator.isNullOrEmpty(password))
 	{
 		String md5 = Auth.getMD5Encode(userName, password);
-		// DB handle for saving the auth data to DB
+		DataManager.INSTANE.CACHE_DATA().addNewAuth(md5);
 		HttpSession newSession = request.getSession(true);
 		newSession.setAttribute(Constants.AUTH, md5);
 		newSession.setMaxInactiveInterval(Auth.MAX_SESSION_TIME_OUT);
+		response.sendRedirect("/pages/buymanager/usereditor.jsp");
 	}
 %>
 <div class="login_block">
