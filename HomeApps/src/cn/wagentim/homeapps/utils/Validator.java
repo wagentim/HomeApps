@@ -23,6 +23,11 @@ public final class Validator
 	{
 	    return (null == array) || (array.length <= 0);
 	}
+	
+	public static boolean isNull(final Object object)
+	{
+		return null == object;
+	}
 
 	public static final boolean isUserLoginDataOk(final String[] loginInfo)
 	{

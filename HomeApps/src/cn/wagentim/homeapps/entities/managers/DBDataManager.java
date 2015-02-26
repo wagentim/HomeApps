@@ -12,11 +12,9 @@ public class DBDataManager
 {
 	private static final EntityManager em = Persistence.createEntityManagerFactory(Constants.PERSISTENCE_UNIT_NAME).createEntityManager();
 
-    public synchronized void addOrModifyData(Class<?> entityType, Object entity, Long id)
+    public synchronized void addOrModifyData(Object entity, Long id)
     {
-    	Object isExist = em.find(entityType, id);
-    	
-    	if( null == isExist )
+    	if( 0 == id )
     	{
     		addNewEntity(entity);
     	}
@@ -40,8 +38,8 @@ public class DBDataManager
 		em.getTransaction().commit();
     }
 
-    @SuppressWarnings({ "unchecked", "unused" })
-	private List<Object> getAllEntity(Class<?> entityType)
+    @SuppressWarnings({ "unchecked" })
+	public List<Object> getAllEntity(Class<?> entityType)
     {
 		return em.createQuery(StatementHelper.jpaGetAllEntity(entityType)).getResultList();
     }

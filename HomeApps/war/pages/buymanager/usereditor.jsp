@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%@ page import="cn.wagentim.homeapps.auth.*, 
+    			cn.wagentim.homeapps.entities.managers.*, 
+    			cn.wagentim.homeapps.utils.*,
+				cn.wagentim.homeapps.entities.*,
+				java.util.List  			
+    			" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,6 +26,12 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	<script src="/js/edituser.js"></script>
 	<title>编辑客户</title>
+	<%
+		if( !Auth.isSessionAvailable(request) )
+		{
+			response.sendRedirect(Constants.PAGE_LOGIN);
+		}
+	%>
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -55,17 +67,31 @@
 	</nav>
 	<div class="container main">
 		<div class="list-group col-xs-offset-1 col-xs-2">
+			<a href='#' class='list-group-item active new' style='text-align: center'>+ 新建客户</a>
+		<%
+			List<Object> customers = (List<Object>)request.getAttribute(Constants.CUSTOMER_LIST);
+			if( null != customers && !customers.isEmpty() )
+			{
+				for(int i = 0; i < customers.size(); i++)
+				{
+					CustomerEntity customer = (CustomerEntity)customers.get(i);
+					%>
+					<a href='#' class='list-group-item active new' style='text-align: center' id=<% customer.getId(); %>><% customer.getLastName(); %> <% customer.getFirstName(); %></a>
+					<%
+				}
+			}
+		%>
 		</div>
 		<div class="container col-xs-offset-1 col-xs-8 edit">
 			<form class="form-horizontal myform" role="form"
-				action="/customer?opt=0" method="POST">
+				action="data" method="POST">
 				<div class='form-group'>
 					<div class="col-sm-2">
-						<label for='uid' class='control-label'
+						<label for='id' class='control-label'
 							style='vertical-align: middle'>用户ID: </label>
 					</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="uid" name="uid"
+						<input type="text" class="form-control" id="id" name="id"
 							value="0" readonly>
 					</div>
 				</div>
@@ -95,6 +121,16 @@
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="alias" name="alias"
 							placeholder="登录名称" value="">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label for='pwd' class='control-label'
+							style='vertical-align: middle'>登录密码: </label>
+					</div>
+					<div class="col-sm-10">
+						<input type="password" class="form-control" id="pwd" name="pwd"
+							placeholder="登录密码" value="" readonly>
 					</div>
 				</div>
 				<div class="form-group">

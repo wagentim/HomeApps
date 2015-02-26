@@ -5,20 +5,18 @@ $(document).ready(
 		
 		function()
 		{
-			refreshCustomersList();
-			
-			$(".list-group").on("click", "a.new",
-				function()
-				{
-					reset_form();
-					selID = 0;
-				}
-			);
-			
-			$(".list-group").on("click", ".item", function(){
-				selID = $(this).attr("uid");
-				assignValues();
-			});
+//			$(".list-group").on("click", "a.new",
+//				function()
+//				{
+//					reset_form();
+//					selID = 0;
+//				}
+//			);
+//			
+//			$(".list-group").on("click", ".item", function(){
+//				selID = $(this).attr("uid");
+//				assignValues();
+//			});
 			
 			$(".myform").submit(function(e){
 				var postData = $(this).serializeArray();
@@ -47,10 +45,10 @@ $(document).ready(
 				$(".myform").submit();
 			});
 			
-			$(".delete").click(function(){
-				deleteCustomer();
-			});
-		}
+//			$(".delete").click(function(){
+//				deleteCustomer();
+//			});
+//		}
 );
 
 function deleteCustomer()
@@ -65,24 +63,24 @@ function deleteCustomer()
 	}
 }
 
-function deleteCustomerFromDB()
-{
-    $.ajax(
-    {
-        url : "/customer?opt=2",
-        type: "POST",
-        data : {uid: selID},
-        success:function(data, textStatus, jqXHR) 
-        {
-        	refreshCustomersList();
-        	reset_form();
-        },
-        error: function(jqXHR, textStatus, errorThrown) 
-        {
-            alert(textStatus);    
-        }
-    });
-}
+//function deleteCustomerFromDB()
+//{
+//    $.ajax(
+//    {
+//        url : "/customer?opt=2",
+//        type: "POST",
+//        data : {uid: selID},
+//        success:function(data, textStatus, jqXHR) 
+//        {
+//        	refreshCustomersList();
+//        	reset_form();
+//        },
+//        error: function(jqXHR, textStatus, errorThrown) 
+//        {
+//            alert(textStatus);    
+//        }
+//    });
+//}
 
 function refreshCustomersList()
 {

@@ -37,7 +37,7 @@
 		HttpSession newSession = request.getSession(true);
 		newSession.setAttribute(Constants.AUTH, md5);
 		newSession.setMaxInactiveInterval(Auth.MAX_SESSION_TIME_OUT);
-		response.sendRedirect("/pages/buymanager/usereditor.jsp");
+		response.sendRedirect(Constants.PAGE_EDIT_USER);
 	}
 %>
 <div class="login_block">

@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
 import cn.wagentim.homeapps.auth.Auth;
+import cn.wagentim.homeapps.utils.Constants;
 
 public class HomeAppsServlet extends HttpServlet
 {
@@ -23,7 +24,7 @@ public class HomeAppsServlet extends HttpServlet
 		{
 				try
 				{
-					response.sendRedirect("/pages/buymanager/usereditor.jsp");
+					response.sendRedirect(Constants.PAGE_EDIT_USER);
 				} catch (IOException e)
 				{
 					e.printStackTrace();
@@ -33,7 +34,7 @@ public class HomeAppsServlet extends HttpServlet
 		{
 			try
 			{
-				response.sendRedirect("/pages/login.jsp");
+				response.sendRedirect(Constants.PAGE_LOGIN);
 			} catch (IOException e)
 			{
 				e.printStackTrace();

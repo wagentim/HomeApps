@@ -36,15 +36,27 @@ public interface Constants
     public static final String CUSTOMER_CITY = "city";
     public static final String CUSTOMER_ZIPCODE = "zipcode";
     public static final String CUSTOMER_ADDRESS = "address";
-	public static final String CUSTOMER_UID = "uid";
+	public static final String CUSTOMER_LIST = "customer_list";
 
 	// 	--------------- Entity Constants ---------------
 	public static final String PERSISTENCE_UNIT_NAME = "google";
+	public static final int ENTITY_CUSTOMER = 0;
 
 	//  --------------- Parser Constants ---------------
 	public static final String OPERATION = "opt";
     public static final String AUTH = "auth";
     public static final String USER_NAME = "usr";
     public static final String PASSWORD = "pwd";
+    public static final String ENTITY = "entity";
+    public static final String ID = "id";
+    
+    //  --------------- Page Constants --------------- 
+	public static final String PAGE_LOGIN = "/pages/login.jsp";
+	public static final String PAGE_EDIT_USER = "/pages/buymanager/usereditor.jsp";
+	
+	//  --------------- Operation Constants ---------------
+	public static final int OPT_ENTITY_SAVE_OR_UPDATE = 0;
+	public static final int OPT_ENTITY_DELETE = 1;
+	public static final int OPT_ENTITY_GET_ALL = 2;
 
 }
