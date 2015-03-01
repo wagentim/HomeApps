@@ -28,6 +28,7 @@ public class DataServlet extends HttpServlet
 		int entityType = RequestHelper.getEntityType(request);
 		int opt = RequestHelper.getOperation(request);
 		Long id = RequestHelper.getID(request);
+
 		switch(opt)
 		{
 			case Constants.OPT_ENTITY_SAVE_OR_UPDATE:

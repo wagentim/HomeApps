@@ -17,6 +17,8 @@ public final class CachedDataManager
 
 	public boolean isAuthAvailable(String md5)
 	{
-		return currentAuths.contains(md5);
+		boolean isContained = currentAuths.contains(md5);
+		System.out.println("auth data is cached: " + isContained);
+		return isContained;
 	}
 }

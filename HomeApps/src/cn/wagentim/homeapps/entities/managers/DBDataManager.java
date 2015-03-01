@@ -16,7 +16,8 @@ public class DBDataManager
     {
     	if( 0 == id )
     	{
-    		addNewEntity(entity);
+//    		addNewEntity(entity);
+    		System.out.println("Add new entitiy");
     	}
     	else
     	{

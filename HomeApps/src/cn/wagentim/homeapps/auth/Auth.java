@@ -15,13 +15,14 @@ import cn.wagentim.homeapps.utils.Validator;
 public final class Auth
 {
     public static final int MAX_SESSION_TIME_OUT = 60 * 60 * 24;
-
+    
     public static final boolean isSessionAvailable(final HttpServletRequest request)
     {
         HttpSession session = request.getSession(false);
 
         if( null == session )
         {
+        	System.out.println("Session is null");
             return false;
         }
 
@@ -40,6 +41,7 @@ public final class Auth
     	
     	if(Validator.isNullOrEmpty(md5))
     	{
+    		System.out.println("Get invailable auth data");
     		return false;
     	}
     	
@@ -48,7 +50,10 @@ public final class Auth
 
 	private static boolean isTimeOut(long creationTime)
     {
-        return ( (System.currentTimeMillis() - creationTime) > MAX_SESSION_TIME_OUT);
+		long endTime = 0;
+        boolean isTimeout = ( ( (endTime = System.currentTimeMillis()) - creationTime) > (MAX_SESSION_TIME_OUT * 1000));
+        System.out.println("Time out: " + isTimeout + " -> " + endTime + " : " + creationTime + " : " + MAX_SESSION_TIME_OUT * 1000);
+        return isTimeout;
     }
 	
 	public static String getMD5Encode(String userName, String password)
