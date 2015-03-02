@@ -1,3 +1,4 @@
+<%@page import="cn.wagentim.homeapps.entities.CustomerEntity"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ page import="cn.wagentim.homeapps.auth.*, cn.wagentim.homeapps.entities.managers.*, cn.wagentim.homeapps.utils.*" %>
@@ -37,7 +38,7 @@
 		HttpSession newSession = request.getSession(true);
 		newSession.setAttribute(Constants.AUTH, md5);
 		newSession.setMaxInactiveInterval(Auth.MAX_SESSION_TIME_OUT);
-		response.sendRedirect(Constants.PAGE_EDIT_USER);
+		request.getRequestDispatcher(Constants.PAGE_EDIT_USER).forward(request, response);
 	}
 %>
 <div class="login_block">

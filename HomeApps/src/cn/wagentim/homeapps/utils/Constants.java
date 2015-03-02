@@ -27,6 +27,7 @@ public interface Constants
 
    //  --------------- Customer Constants ---------------
     public static final String CUSTOMER_ALISA = "alias";
+    public static final String CUSTOMER_PASSWORD = "pwd";
     public static final String CUSTOMER_FIRST_NAME = "firstname";
     public static final String CUSTOMER_LAST_NAME = "lastname";
     public static final String CUSTOMER_TELEPHONE = "telephon";
@@ -49,11 +50,11 @@ public interface Constants
     public static final String PASSWORD = "pwd";
     public static final String ENTITY = "entity";
     public static final String ID = "id";
-    
-    //  --------------- Page Constants --------------- 
+
+    //  --------------- Page Constants ---------------
 	public static final String PAGE_LOGIN = "/pages/login.jsp";
 	public static final String PAGE_EDIT_USER = "/pages/buymanager/usereditor.jsp";
-	
+
 	//  --------------- Operation Constants ---------------
 	public static final int OPT_ENTITY_SAVE_OR_UPDATE = 0;
 	public static final int OPT_ENTITY_DELETE = 1;

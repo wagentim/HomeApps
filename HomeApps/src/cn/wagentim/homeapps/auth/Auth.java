@@ -3,6 +3,8 @@ package cn.wagentim.homeapps.auth;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,14 +17,15 @@ import cn.wagentim.homeapps.utils.Validator;
 public final class Auth
 {
     public static final int MAX_SESSION_TIME_OUT = 60 * 60 * 24;
-    
+    private static Logger logger = Logger.getLogger(Auth.class.getSimpleName());
+
     public static final boolean isSessionAvailable(final HttpServletRequest request)
     {
         HttpSession session = request.getSession(false);
 
         if( null == session )
         {
-        	System.out.println("Session is null");
+        	logger.log(Level.INFO, "Session is null");
             return false;
         }
 
@@ -31,20 +34,20 @@ public final class Auth
             session.invalidate();
             return false;
         }
-        
+
         return true;
     }
 
     private static boolean isAuthAvailable(HttpSession session)
 	{
     	String md5 = (String) session.getAttribute(Constants.AUTH);
-    	
+
     	if(Validator.isNullOrEmpty(md5))
     	{
-    		System.out.println("Get invailable auth data");
+    		logger.log(Level.INFO, "Get invailable auth data");
     		return false;
     	}
-    	
+
     	return DataManager.INSTANE.CACHE_DATA().isAuthAvailable(md5);
 	}
 
@@ -52,10 +55,10 @@ public final class Auth
     {
 		long endTime = 0;
         boolean isTimeout = ( ( (endTime = System.currentTimeMillis()) - creationTime) > (MAX_SESSION_TIME_OUT * 1000));
-        System.out.println("Time out: " + isTimeout + " -> " + endTime + " : " + creationTime + " : " + MAX_SESSION_TIME_OUT * 1000);
+        logger.log(Level.INFO, "Time out: " + isTimeout + " -> " + endTime + " : " + creationTime + " : " + MAX_SESSION_TIME_OUT * 1000);
         return isTimeout;
     }
-	
+
 	public static String getMD5Encode(String userName, String password)
     {
 	    StringBuffer sb = new StringBuffer();

@@ -40,10 +40,6 @@ public final class CustomerEntity implements Serializable, IEntityStatus {
 	/** indicate the assign time of the Auth MD5 code */
 	private String validationStart;
 
-	/** indicate that this customer entity is new created or has been modified */
-	@Transient
-	private int status = CUSTOMER_STATUS_NULL;
-
 
     public Long getId()
     {
@@ -183,14 +179,7 @@ public final class CustomerEntity implements Serializable, IEntityStatus {
     {
         this.validationStart = validationStart;
     }
-    public int getStatus()
-    {
-        return status;
-    }
-    public void setStatus(int status)
-    {
-        this.status = status;
-    }
+
     @Override
 	public int hashCode()
 	{
@@ -224,8 +213,7 @@ public final class CustomerEntity implements Serializable, IEntityStatus {
     {
         return "CustomerEntity [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", telefon=" + telefon + ", address=" + address + ", other=" + other
                 + ", contury=" + country + ", province=" + province + ", city=" + city + ", zipcode=" + zipcode + ", securityQues=" + securityQues + ", securityAnsw="
-                + securityAnsw + ", email=" + email + ", pwd=" + pwd + ", alias=" + alias + ", md5=" + md5 + ", validationStart=" + validationStart + ", status="
-                + status + "]";
+                + securityAnsw + ", email=" + email + ", pwd=" + pwd + ", alias=" + alias + ", md5=" + md5 + ", validationStart=" + validationStart + "]";
     }
 
 }

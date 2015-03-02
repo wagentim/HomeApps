@@ -1,10 +1,14 @@
+<%@page import="java.net.URLEncoder"%>
+<%@page import="javax.servlet.http.Cookie"%>
+<%@page import="java.io.PrintWriter"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-    <%@ page import="cn.wagentim.homeapps.auth.*, 
-    			cn.wagentim.homeapps.entities.managers.*, 
+    <%@ page import="cn.wagentim.homeapps.auth.*,
+    			cn.wagentim.homeapps.entities.managers.*,
     			cn.wagentim.homeapps.utils.*,
 				cn.wagentim.homeapps.entities.*,
-				java.util.List  			
+				java.util.List,
+				com.google.appengine.labs.repackaged.org.json.*
     			" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -24,7 +28,9 @@
 		src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	<script src="/js/edituser.js"></script>
+		<script src="/js/Gruntfile.js"></script>
+		<script src="/js/jquery.cookie.js"></script>
+		<script src="/js/edituser.js"></script>
 	<title>编辑客户</title>
 	<%
 		if( !Auth.isSessionAvailable(request) )
@@ -69,22 +75,37 @@
 		<div class="list-group col-xs-offset-1 col-xs-2">
 			<a href='#' class='list-group-item active new' style='text-align: center'>+ 新建客户</a>
 		<%
-			List<Object> customers = (List<Object>)request.getAttribute(Constants.CUSTOMER_LIST);
-			if( null != customers && !customers.isEmpty() )
+
+			String json_customers = Utils.toJson(DataManager.INSTANE.DB_DATA().getAllEntity(CustomerEntity.class));
+
+			if( !Validator.isNullOrEmpty(json_customers) )
 			{
-				for(int i = 0; i < customers.size(); i++)
+				JSONArray customers = Utils.fromJson(json_customers);
+
+				if( null != customers && customers.length() > 0 )
 				{
-					CustomerEntity customer = (CustomerEntity)customers.get(i);
-					%>
-					<a href='#' class='list-group-item active new' style='text-align: center' id=<% customer.getId(); %>><% customer.getLastName(); %> <% customer.getFirstName(); %></a>
-					<%
+					for(int i = 0; i < customers.length(); i++)
+					{
+						final JSONObject customer = customers.getJSONObject(i);
+						if( null != customer )
+						{
+						    long id = customer.getLong("id");
+						    String lastName = customer.getString("lastName");
+						    String firstName = customer.getString("firstName");
+						%>
+							<a href='#' class='list-group-item item' style='text-align: center' uid='<%= id %>'><%=lastName %> <%=firstName %></a>
+						<%
+						}
+					}
 				}
+
 			}
+
 		%>
 		</div>
 		<div class="container col-xs-offset-1 col-xs-8 edit">
 			<form class="form-horizontal myform" role="form"
-				action="data" method="POST">
+				action="/data?entity=0&opt=0" method="POST">
 				<div class='form-group'>
 					<div class="col-sm-2">
 						<label for='id' class='control-label'
@@ -211,5 +232,43 @@
 			</form>
 		</div>
 	</div>
+
+	<script type="text/javascript">
+		var json_customer = <%=json_customers %>;
+		var customers;
+		$(document).ready(function(){
+			$(".list-group").on("click", ".item", function(){
+				customers = jQuery.parseJSON(json_customer);
+				assignValues();
+			});
+		});
+
+		function assignValues()
+		{
+			var customer;
+			for(var i = 0; i < customers.length; i++)
+			{
+				var tmp = JSON.stringify(customers[i].id);
+				if( selID == tmp )
+				{
+					customer = customers[i];
+					break;
+				}
+			}
+			$("#uid").val(customer.id);
+			$("#alias").val(customer.alias);
+			$("#telephon").val(customer.telefon);
+			$("#email").val(customer.email);
+			$("#country").val(customer.country);
+			$("#province").val(customer.province);
+			$("#city").val(customer.city);
+			$("#zipcode").val(customer.zipcode);
+			$("#address").val(customer.address);
+			$("#firstname").val(customer.firstName);
+			$("#lastname").val(customer.lastName);
+			$("#pwd").val(customer.pwd);
+		}
+	</script>
+
 </body>
 </html>

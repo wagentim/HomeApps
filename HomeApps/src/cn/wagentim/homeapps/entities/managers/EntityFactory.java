@@ -26,7 +26,7 @@ public final class EntityFactory
 		Map<String, String[]> parameters = request.getParameterMap();
 
     	CustomerEntity customer = new CustomerEntity();
-    	
+
     	Long id = Long.valueOf(parameters.get(Constants.ID)[0]);
 
     	if( 0 != id )

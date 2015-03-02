@@ -6,7 +6,7 @@ public final class StatementHelper
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("select e from ");
-		sb.append(entity.getClass().getName());
+		sb.append(entity.getSimpleName());
 		sb.append(" e;");
 		return sb.toString();
 	}
