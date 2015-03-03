@@ -19,7 +19,7 @@ public class DBDataManager
     {
         Class<?> entityClazz = EntityHelper.getEntityClazz(entityType);
 
-    	if( 0 == id )
+    	if( null == id || 0 == id )
     	{
     		addNewEntity(entity);
     	}

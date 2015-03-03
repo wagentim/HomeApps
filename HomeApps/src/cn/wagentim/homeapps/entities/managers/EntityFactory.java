@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.wagentim.homeapps.entities.CustomerEntity;
 import cn.wagentim.homeapps.utils.Constants;
+import cn.wagentim.homeapps.utils.Validator;
 
 public final class EntityFactory
 {
@@ -26,14 +27,18 @@ public final class EntityFactory
 		Map<String, String[]> parameters = request.getParameterMap();
 
     	CustomerEntity customer = new CustomerEntity();
+    	
+    	String[] userID = parameters.get(Constants.ID);
 
-    	Long id = Long.valueOf(parameters.get(Constants.ID)[0]);
-
-    	if( 0 != id )
+    	if( Validator.isNull(userID) )
     	{
+    	}
+    	else
+    	{
+    		Long id = Long.valueOf(userID[0]);
     		customer.setId(id);
     	}
-
+    	
     	customer.setAlias(parameters.get(Constants.CUSTOMER_ALISA)[0]);
     	customer.setFirstName(parameters.get(Constants.CUSTOMER_FIRST_NAME)[0]);
     	customer.setLastName(parameters.get(Constants.CUSTOMER_LAST_NAME)[0]);

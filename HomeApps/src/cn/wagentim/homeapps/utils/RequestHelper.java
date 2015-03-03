@@ -35,7 +35,11 @@ public final class RequestHelper
 
 	public static final Long getID(final HttpServletRequest request)
 	{
-		String opt = request.getParameter(Constants.ID);
-		return Long.valueOf(opt);
+		String userID = request.getParameter(Constants.ID);
+		if(Validator.isNullOrEmpty(userID))
+		{
+			return null;
+		}
+		return Long.valueOf(userID);
 	}
 }

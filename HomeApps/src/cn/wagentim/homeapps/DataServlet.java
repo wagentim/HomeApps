@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cn.wagentim.homeapps.entities.managers.DataManager;
 import cn.wagentim.homeapps.entities.managers.EntityFactory;
+import cn.wagentim.homeapps.entities.managers.EntityHelper;
 import cn.wagentim.homeapps.utils.Constants;
 import cn.wagentim.homeapps.utils.RequestHelper;
 
@@ -38,9 +39,16 @@ public class DataServlet extends HttpServlet
 			case Constants.OPT_ENTITY_SAVE_OR_UPDATE:
 				Object entity = EntityFactory.createEntity(entityType, request);
 				DataManager.INSTANE.DB_DATA().addOrModifyData(entity, id, entityType);
-				request.getRequestDispatcher(Constants.PAGE_EDIT_USER).forward(request, response);
+				response.setHeader("Refresh", "0; URL =");
+				break;
+			case Constants.OPT_ENTITY_DELETE:
+				if( 0 != id )
+				{
+					DataManager.INSTANE.DB_DATA().deleteEntity(EntityHelper.getEntityClazz(entityType), id);
+				}
 				break;
 
 		}
+//		request.getRequestDispatcher(Constants.PAGE_EDIT_USER).forward(request, response);
 	}
 }

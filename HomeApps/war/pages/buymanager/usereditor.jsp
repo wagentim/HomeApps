@@ -74,13 +74,14 @@
 		<div class="list-group col-xs-offset-1 col-xs-2">
 			<a href='#' class='list-group-item active new' style='text-align: center'>+ 新建客户</a>
 		<%
-
 			String json_customers = Utils.toJson(DataManager.INSTANE.DB_DATA().getAllEntity(CustomerEntity.class));
 
 			if( !Validator.isNullOrEmpty(json_customers) )
 			{
 				JSONArray customers = Utils.fromJson(json_customers);
-
+				
+				System.out.println("Customers Number: " + customers.length());
+				
 				if( null != customers && customers.length() > 0 )
 				{
 					for(int i = 0; i < customers.length(); i++)
@@ -91,7 +92,7 @@
 						    long id = customer.getLong("id");
 						    String lastName = customer.getString("lastName");
 						    String firstName = customer.getString("firstName");
-						%>
+		%>
 							<a href='#' class='list-group-item item' style='text-align: center' onclick="" uid='<%= id %>'><%=lastName %> <%=firstName %></a>
 						<%
 						}
@@ -103,15 +104,14 @@
 		%>
 		</div>
 		<div class="container col-xs-offset-1 col-xs-8 edit">
-			<form class="form-horizontal myform" role="form"
-				action="/data?entity=0&opt=0" method="POST">
+			<form class="form-horizontal myform" role="form">
 				<div class='form-group'>
 					<div class="col-sm-2">
-						<label for='id' class='control-label'
+						<label for='uid' class='control-label'
 							style='vertical-align: middle'>用户ID: </label>
 					</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="id" name="id"
+						<input type="text" class="form-control" id="uid" name="uid"
 							value="0" readonly>
 					</div>
 				</div>
@@ -225,7 +225,7 @@
 						<button type="button" class="btn btn-danger delete">删除</button>
 					</div>
 					<div class="col-sm-offset-8 col-sm-2 save">
-						<button type="button" class="btn btn-success save">保存</button>
+						<button type=button class="btn btn-success save">保存</button>
 					</div>
 				</div>
 			</form>
@@ -233,47 +233,7 @@
 	</div>
 
 	<script type="text/javascript">
-		
-		var json_customer = <%=json_customers %>;
-		var customers;
-		
-		function customerItemSel()
-		{
-			$
-			
-		}
-		$(document).ready(function(){
-			$(".list-group").on("click", ".item", function(){
-				customers = jQuery.parseJSON(json_customer);
-				assignValues();
-			});
-		});
-
-		function assignValues()
-		{
-			var customer;
-			for(var i = 0; i < customers.length; i++)
-			{
-				var tmp = JSON.stringify(customers[i].id);
-				if( selID == tmp )
-				{
-					customer = customers[i];
-					break;
-				}
-			}
-			$("#uid").val(customer.id);
-			$("#alias").val(customer.alias);
-			$("#telephon").val(customer.telefon);
-			$("#email").val(customer.email);
-			$("#country").val(customer.country);
-			$("#province").val(customer.province);
-			$("#city").val(customer.city);
-			$("#zipcode").val(customer.zipcode);
-			$("#address").val(customer.address);
-			$("#firstname").val(customer.firstName);
-			$("#lastname").val(customer.lastName);
-			$("#pwd").val(customer.pwd);
-		}
+		window.json_customer = <%=json_customers %>;
 	</script>
 
 </body>
