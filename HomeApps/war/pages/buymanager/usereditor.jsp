@@ -28,7 +28,6 @@
 		src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-		<script src="/js/Gruntfile.js"></script>
 		<script src="/js/jquery.cookie.js"></script>
 		<script src="/js/edituser.js"></script>
 	<title>编辑客户</title>
@@ -93,7 +92,7 @@
 						    String lastName = customer.getString("lastName");
 						    String firstName = customer.getString("firstName");
 						%>
-							<a href='#' class='list-group-item item' style='text-align: center' uid='<%= id %>'><%=lastName %> <%=firstName %></a>
+							<a href='#' class='list-group-item item' style='text-align: center' onclick="" uid='<%= id %>'><%=lastName %> <%=firstName %></a>
 						<%
 						}
 					}
@@ -234,8 +233,15 @@
 	</div>
 
 	<script type="text/javascript">
+		
 		var json_customer = <%=json_customers %>;
 		var customers;
+		
+		function customerItemSel()
+		{
+			$
+			
+		}
 		$(document).ready(function(){
 			$(".list-group").on("click", ".item", function(){
 				customers = jQuery.parseJSON(json_customer);
