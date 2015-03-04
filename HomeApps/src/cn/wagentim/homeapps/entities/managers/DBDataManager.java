@@ -15,10 +15,8 @@ public class DBDataManager
 	private static final EntityManager em = Persistence.createEntityManagerFactory(Constants.PERSISTENCE_UNIT_NAME).createEntityManager();
 	private static final Logger logger = Logger.getLogger(DBDataManager.class.getSimpleName());
 
-    public synchronized void addOrModifyData(Object entity, Long id, int entityType)
+    public void addOrModifyData(Object entity, Long id, int entityType)
     {
-        Class<?> entityClazz = EntityHelper.getEntityClazz(entityType);
-
     	if( null == id || 0 == id )
     	{
     		addNewEntity(entity);
@@ -52,7 +50,7 @@ public class DBDataManager
 		return em.createQuery(StatementHelper.jpaGetAllEntity(entityType)).getResultList();
     }
 
-	public synchronized void deleteEntity(Class<?> entityType, Long uid)
+	public void deleteEntity(Class<?> entityType, Long uid)
 	{
 		Object c = em.find(entityType, uid);
 

@@ -39,7 +39,7 @@ public class DataServlet extends HttpServlet
 			case Constants.OPT_ENTITY_SAVE_OR_UPDATE:
 				Object entity = EntityFactory.createEntity(entityType, request);
 				DataManager.INSTANE.DB_DATA().addOrModifyData(entity, id, entityType);
-				response.setHeader("Refresh", "0; URL =");
+				response.sendRedirect(Constants.PAGE_EDIT_USER);
 				break;
 			case Constants.OPT_ENTITY_DELETE:
 				if( 0 != id )
@@ -47,8 +47,6 @@ public class DataServlet extends HttpServlet
 					DataManager.INSTANE.DB_DATA().deleteEntity(EntityHelper.getEntityClazz(entityType), id);
 				}
 				break;
-
 		}
-//		request.getRequestDispatcher(Constants.PAGE_EDIT_USER).forward(request, response);
 	}
 }

@@ -79,9 +79,9 @@
 			if( !Validator.isNullOrEmpty(json_customers) )
 			{
 				JSONArray customers = Utils.fromJson(json_customers);
-				
+
 				System.out.println("Customers Number: " + customers.length());
-				
+
 				if( null != customers && customers.length() > 0 )
 				{
 					for(int i = 0; i < customers.length(); i++)
@@ -98,13 +98,12 @@
 						}
 					}
 				}
-
 			}
 
 		%>
 		</div>
 		<div class="container col-xs-offset-1 col-xs-8 edit">
-			<form class="form-horizontal myform" role="form">
+			<form class="form-horizontal myform" role="form" action="/data?entity=0&opt=0" method="POST">
 				<div class='form-group'>
 					<div class="col-sm-2">
 						<label for='uid' class='control-label'
@@ -225,7 +224,7 @@
 						<button type="button" class="btn btn-danger delete">删除</button>
 					</div>
 					<div class="col-sm-offset-8 col-sm-2 save">
-						<button type=button class="btn btn-success save">保存</button>
+						<button type=submit class="btn btn-success save">保存</button>
 					</div>
 				</div>
 			</form>
