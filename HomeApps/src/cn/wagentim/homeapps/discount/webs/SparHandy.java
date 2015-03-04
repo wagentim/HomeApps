@@ -1,8 +1,10 @@
 package cn.wagentim.homeapps.discount.webs;
 
+import cn.wagentim.homeapps.discount.handlers.ISiteHandler;
+import cn.wagentim.homeapps.discount.handlers.SparHandyHandler;
+
 public class SparHandy implements IWebsite
 {
-
     @Override
     public String getName()
     {
@@ -13,7 +15,7 @@ public class SparHandy implements IWebsite
     public String getDomain()
     {
         // TODO Auto-generated method stub
-        return null;
+        return "www.sparhandy.de";
     }
 
     @Override
@@ -47,8 +49,13 @@ public class SparHandy implements IWebsite
     @Override
     public String getData()
     {
-        // TODO Auto-generated method stub
         return null;
     }
+
+	@Override
+	public ISiteHandler getHandler()
+	{
+		return new SparHandyHandler(this);
+	}
 
 }
