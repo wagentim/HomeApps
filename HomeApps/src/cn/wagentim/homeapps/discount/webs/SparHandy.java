@@ -1,7 +1,10 @@
 package cn.wagentim.homeapps.discount.webs;
 
+import java.net.URI;
+
 import cn.wagentim.homeapps.discount.handlers.ISiteHandler;
 import cn.wagentim.homeapps.discount.handlers.SparHandyHandler;
+import cn.wagentim.homeapps.utils.StringConstants;
 
 public class SparHandy implements IWebsite
 {
@@ -28,22 +31,19 @@ public class SparHandy implements IWebsite
     @Override
     public String getAuth()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return StringConstants.EMPTY_STRING;
     }
 
     @Override
     public String getUserName()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return StringConstants.EMPTY_STRING;
     }
 
     @Override
     public String getPassword()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return StringConstants.EMPTY_STRING;
     }
 
     @Override
@@ -56,6 +56,25 @@ public class SparHandy implements IWebsite
 	public ISiteHandler getHandler()
 	{
 		return new SparHandyHandler(this);
+	}
+
+	@Override
+	public String getUserNameDefinition()
+	{
+		return null;
+	}
+
+	@Override
+	public String getPasswordDefinition()
+	{
+		return null;
+	}
+
+	@Override
+	public URI getLoginURI()
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

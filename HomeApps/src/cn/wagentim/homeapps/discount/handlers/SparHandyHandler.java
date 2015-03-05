@@ -13,8 +13,14 @@ public class SparHandyHandler extends AbstractSiteHandler
 	@Override
 	public String exec()
 	{
-		
+		grabDiscountPicOnMainPage();
 		return formatResult();
+	}
+
+	private void grabDiscountPicOnMainPage()
+	{
+		// TODO Auto-generated method stub
+		
 	}
 
 	private String formatResult()

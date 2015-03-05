@@ -1,5 +1,8 @@
 package cn.wagentim.homeapps.utils;
 
+import org.apache.http.StatusLine;
+import org.apache.http.client.methods.CloseableHttpResponse;
+
 
 
 public final class Validator
@@ -40,6 +43,18 @@ public final class Validator
 		String pwd = loginInfo[1];
 
 		if( null == usr || null == pwd || usr.isEmpty() || pwd.isEmpty() )
+		{
+			return false;
+		}
+
+		return true;
+	}
+	
+	public static boolean isHttpResponseOk(CloseableHttpResponse response)
+	{
+		StatusLine statusLine = response.getStatusLine();
+
+		if (statusLine.getStatusCode() >= 300)
 		{
 			return false;
 		}

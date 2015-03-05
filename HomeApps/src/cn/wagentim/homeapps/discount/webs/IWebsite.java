@@ -1,5 +1,7 @@
 package cn.wagentim.homeapps.discount.webs;
 
+import java.net.URI;
+
 import cn.wagentim.homeapps.discount.handlers.ISiteHandler;
 
 public interface IWebsite
@@ -12,4 +14,7 @@ public interface IWebsite
     String getPassword();
     String getData();
     ISiteHandler getHandler();
+	String getUserNameDefinition();
+	String getPasswordDefinition();
+	URI getLoginURI();
 }
