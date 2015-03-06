@@ -38,7 +38,7 @@ public class DataServlet extends HttpServlet
 		{
 			case Constants.OPT_ENTITY_SAVE_OR_UPDATE:
 				Object entity = EntityFactory.createEntity(entityType, request);
-				DataManager.INSTANE.DB_DATA().addOrModifyData(entity, id, entityType);
+				DataManager.INSTANE.DB_DATA().addOrModifyData(entity, id);
 				response.sendRedirect(Constants.PAGE_EDIT_USER);
 				break;
 			case Constants.OPT_ENTITY_DELETE:

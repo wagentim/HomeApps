@@ -15,7 +15,7 @@ public class DBDataManager
 	private static final EntityManager em = Persistence.createEntityManagerFactory(Constants.PERSISTENCE_UNIT_NAME).createEntityManager();
 	private static final Logger logger = Logger.getLogger(DBDataManager.class.getSimpleName());
 
-    public void addOrModifyData(Object entity, Long id, int entityType)
+    public void addOrModifyData(Object entity, Long id)
     {
     	if( null == id || 0 == id )
     	{
@@ -25,6 +25,8 @@ public class DBDataManager
     	{
     		mergeEntity(entity);
     	}
+
+
     }
 
     private void mergeEntity(final Object entity)
@@ -43,8 +45,7 @@ public class DBDataManager
 		logger.log(Level.INFO, "DBDataManager#addNewEntity add a new entity: " + entity.getClass().getSimpleName());
     }
 
-    @SuppressWarnings({ "unchecked" })
-	public List<Object> getAllEntity(Class<?> entityType)
+	public List<?> getAllEntity(Class<?> entityType)
     {
         logger.log(Level.INFO, "DBDataManager#getAllEntity get all entites: " + entityType.getSimpleName());
 		return em.createQuery(StatementHelper.jpaGetAllEntity(entityType)).getResultList();
