@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ page import="cn.wagentim.homeapps.auth.*,
+    			cn.wagentim.homeapps.entities.managers.*,
+    			cn.wagentim.homeapps.utils.*,
+				cn.wagentim.homeapps.entities.*,
+				java.util.List,
+				com.google.appengine.labs.repackaged.org.json.*,
+				java.net.URLEncoder,
+				javax.servlet.http.Cookie,
+				java.io.PrintWriter
+    			" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,13 +30,19 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="/js/order.js"></script>
 <title>代购管理系统</title>
+	<%
+		if( !Auth.isSessionAvailable(request) )
+		{
+			response.sendRedirect(Constants.PAGE_LOGIN);
+		}
+	%>
 </head>
 
 <body>
-	<div id="msg" class="alert alert-danger" role="alert"
-		style="text-align: center"></div>
-	<div id="info" class="alert alert-success" role="alert"
-		style="text-align: center"></div>
+	<%
+			String json_customers = Utils.toJson(DataManager.INSTANE.DB_DATA().getAllEntity(CustomerEntity.class));
+	%>
+
 	<div id="command_list" class="container">
 		<button id="add_order" type="button" class="btn btn-warning"
 			role="button">添加订单</button>
@@ -36,7 +52,7 @@
 	</div>
 	<div id='order_list' class='container'></div>
 	<script type="text/javascript">
-		window.customers =
+		window.json_customer = <%=json_customers %>;
 	</script>
 </body>
 </html>

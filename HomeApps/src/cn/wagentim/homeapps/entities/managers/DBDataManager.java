@@ -15,11 +15,12 @@ public class DBDataManager
 	private static final EntityManager em = Persistence.createEntityManagerFactory(Constants.PERSISTENCE_UNIT_NAME).createEntityManager();
 	private static final Logger logger = Logger.getLogger(DBDataManager.class.getSimpleName());
 
-    public void addOrModifyData(Object entity, Long id)
+    public Long addOrModifyData(Object entity, Long id)
     {
     	if( null == id || 0 == id )
     	{
     		addNewEntity(entity);
+    		return entity.
     	}
     	else
     	{

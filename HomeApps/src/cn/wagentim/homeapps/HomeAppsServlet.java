@@ -24,7 +24,7 @@ public class HomeAppsServlet extends HttpServlet
 		{
 				try
 				{
-					response.sendRedirect(Constants.PAGE_EDIT_USER);
+					response.sendRedirect(Constants.PAGE_ORDER);
 				} catch (IOException e)
 				{
 					e.printStackTrace();

@@ -1,6 +1,3 @@
-<%@page import="java.net.URLEncoder"%>
-<%@page import="javax.servlet.http.Cookie"%>
-<%@page import="java.io.PrintWriter"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
     <%@ page import="cn.wagentim.homeapps.auth.*,
@@ -8,7 +5,10 @@
     			cn.wagentim.homeapps.utils.*,
 				cn.wagentim.homeapps.entities.*,
 				java.util.List,
-				com.google.appengine.labs.repackaged.org.json.*
+				com.google.appengine.labs.repackaged.org.json.*,
+				java.net.URLEncoder,
+				javax.servlet.http.Cookie,
+				java.io.PrintWriter
     			" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -79,8 +79,6 @@
 			if( !Validator.isNullOrEmpty(json_customers) )
 			{
 				JSONArray customers = Utils.fromJson(json_customers);
-
-				System.out.println("Customers Number: " + customers.length());
 
 				if( null != customers && customers.length() > 0 )
 				{

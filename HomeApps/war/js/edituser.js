@@ -2,38 +2,12 @@ var selID;
 
 $(document).ready(function(){
 
-//	$(".save").click(function(){
-//		$(".myform").submit();
-//	});
-
 	$(document).ready(function(){
 		$(".list-group").on("click", ".item", function(){
 			selID = $(this).attr("uid");
 			assignValues();
 		});
 	});
-
-//	$(".myform").submit(function(e){
-//		var postData = $(this).serializeArray();
-//	    $.ajax(
-//	    {
-//	        url : "/data?entity=0&opt=0",
-//	        type: "POST",
-//	        encoding: "utf-8",
-//	        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-//	        data : postData,
-//	        success:function(data, textStatus, jqXHR)
-//	        {
-//	        	location.reload();
-//	        },
-//	        error: function(jqXHR, textStatus, errorThrown)
-//	        {
-//	            alert(textStatus);
-//	        }
-//	    });
-//	    e.preventDefault();
-//	    e.unbind();
-//	});
 
 	$(".delete").click(function(){
 		deleteCustomer();

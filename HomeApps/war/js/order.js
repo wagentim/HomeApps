@@ -9,32 +9,11 @@ $(document).ready(
 	
     function () {
     	
-    	/** initial some components when the page is loaded */
-    	// hide alert block
-    	$("div#msg").hide();
-    	$("div#info").hide();
-    	
-    	// get Auth in the cookie
-//    	auth = getAuth();
-    	
-    	/** loading some initial data from the remote server */
-    	loadCustomers();
-    	
-    	if(null !== customers)
-    	{
-    		$("button#add_order").removeAttr("disabled");
-    	}
-    	else
-    	{
-    		$("button#add_order").attr("disabled", true);
-    	}
-    	
         $("button#add_order").click( 
         		
             function ()
             {
                 addOrder();
-                
             }
         );
         
@@ -57,40 +36,10 @@ $(document).ready(
         
         $("button#modify_customer").click(function()
         {
-        	window.location="edituser.html";
+        	window.location.href = "/pages/buymanager/usereditor.jsp";
         });
     }
 );
-
-function showAlert(message)
-{
-	$("div#msg").slideDown("slow", function(){$("div#msg").html(message);}).delay(show_alert_delay_time).slideUp("slow");
-}
-
-function showInfo(message)
-{
-	$("div#info").slideDown("slow", function(){$("div#info").html(message);}).delay(show_alert_delay_time).slideUp("slow");
-}
-
-function loadCustomers()
-{
-	$.ajax(
-	    	{
-	    		type: "GET",
-	            url: "/customer?opt=1",
-	            dataType: "json",
-	            async: false,
-	            success: function(data)
-	            {
-	            	customers = data;
-	            },
-	            error: function(e)
-	            {
-	            	customers = null;
-	            }
-	    	}
-	    );
-}
 
 function addOrder()
 {
@@ -205,10 +154,11 @@ function getDropDown(name, id) {
     result += "<ul class='dropdown-menu' role='menu' aria-labelledby='menu1'>";
     if( id == id_customer)
     {
-    	var mount = customers.length;
-    	for(var i =0; i < mount; i++)
+    	for(var i = 0; i < window.json_customer.length; i++)
     	{
-    		result += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#'>" + customers[i].lastName + " " + customers[i].firstName + "</a></li>");
+    		var firstName = window.json_customer[i].firstName;
+    		var lastName = window.json_customer[i].lastName;
+    		result += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#'>" + lastName + " " + firstName + "</a></li>");
     	}
     }
     result += "</ul></div>";

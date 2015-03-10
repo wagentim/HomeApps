@@ -38,7 +38,7 @@
 		HttpSession newSession = request.getSession(true);
 		newSession.setAttribute(Constants.AUTH, md5);
 		newSession.setMaxInactiveInterval(Auth.MAX_SESSION_TIME_OUT);
-		request.getRequestDispatcher(Constants.PAGE_ORDER).forward(request, response);
+		response.sendRedirect(Constants.PAGE_ORDER);
 	}
 %>
 <div class="login_block">
