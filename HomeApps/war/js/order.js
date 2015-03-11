@@ -29,7 +29,8 @@ $(document).ready(
                 function()
                 {
         			var selText = $(this).text();
-        			$(this).parents('.dropdown').find('.dropdown-toggle').html(selText+'<span class="caret"></span>');
+        			$(this).parents('.dropdown').find('.dropdown-toggle').html(selText+'<span class="caret"></span>').end().children( '.dropdown-toggle' ).dropdown( 'toggle' );
+        			return false;
                 }
         );
         
@@ -44,7 +45,7 @@ $(document).ready(
 
 function addOrder()
 {
-    var result = "<div id='order'>";
+    var result = "<hr /><div id='order'>";
     result += getOrderTitle(id_customer);
     result += getOrderTable(id_product);
     result += "</div>";
@@ -147,7 +148,7 @@ function getInputLine()
 {
     var result = "";
     result += "<div class='form-group, input'>";
-    result += "<input type='text' class='form-control' id='input' style='vertical-align: middle'>";
+    result += "<input type='text' class='form-control' id='input'>";
     result += "</div>";
     return result;
 }
