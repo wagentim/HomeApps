@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.wagentim.homeapps.entities.IEntity;
 import cn.wagentim.homeapps.entities.managers.DataManager;
 import cn.wagentim.homeapps.entities.managers.EntityFactory;
 import cn.wagentim.homeapps.entities.managers.EntityHelper;
@@ -37,9 +38,17 @@ public class DataServlet extends HttpServlet
 		switch(opt)
 		{
 			case Constants.OPT_ENTITY_SAVE_OR_UPDATE:
-				Object entity = EntityFactory.createEntity(entityType, request);
+				IEntity entity = EntityFactory.createEntity(entityType, request);
 				DataManager.INSTANE.DB_DATA().addOrModifyData(entity, id);
-				response.sendRedirect(Constants.PAGE_EDIT_USER);
+				switch(entityType)
+				{
+				    case Constants.ENTITY_CUSTOMER:
+				        response.sendRedirect(Constants.PAGE_EDIT_USER);
+				        break;
+				    case Constants.ENTITY_PRODUCT:
+				        response.sendRedirect(Constants.PAGE_EDIT_PRODUCT);
+				        break;
+				}
 				break;
 			case Constants.OPT_ENTITY_DELETE:
 				if( 0 != id )

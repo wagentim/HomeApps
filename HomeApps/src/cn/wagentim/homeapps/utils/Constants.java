@@ -25,7 +25,7 @@ public interface Constants
     public static final String CONTENT_TYPE_TEXT = "text/text";
     public static final String CONTENT_CHAR_SET_UTF8 = "utf-8";
 
-   //  --------------- Customer Constants ---------------
+    //  --------------- Customer Constants ---------------
     public static final String CUSTOMER_ALISA = "alias";
     public static final String CUSTOMER_PASSWORD = "pwd";
     public static final String CUSTOMER_FIRST_NAME = "firstname";
@@ -39,9 +39,16 @@ public interface Constants
     public static final String CUSTOMER_ADDRESS = "address";
 	public static final String CUSTOMER_LIST = "customer_list";
 
+	//  --------------- Product Constants ---------------
+	public static final String PRODUCT_NAME = "name";
+	public static final String PRODUCT_CATEGORIE = "categorie";
+	public static final String PRODUCT_DEFAULT_PRICE = "defaultprice";
+	public static final String PRODUCT_DEFAULT_AMOUNT = "defaultamount";
+
 	// 	--------------- Entity Constants ---------------
 	public static final String PERSISTENCE_UNIT_NAME = "google";
 	public static final int ENTITY_CUSTOMER = 0;
+	public static final int ENTITY_PRODUCT = 1;
 
 	//  --------------- Parser Constants ---------------
 	public static final String OPERATION = "opt";
@@ -54,6 +61,7 @@ public interface Constants
     //  --------------- Page Constants ---------------
 	public static final String PAGE_LOGIN = "/pages/login.jsp";
 	public static final String PAGE_EDIT_USER = "/pages/buymanager/usereditor.jsp";
+	public static final String PAGE_EDIT_PRODUCT = "/pages/buymanager/producteditor.jsp";
 	public static final String PAGE_ORDER = "/pages/buymanager/order.jsp";
 
 	//  --------------- Operation Constants ---------------

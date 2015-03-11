@@ -58,6 +58,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="order.html">代购管理系统 <span class="sr-only">(current)</span></a></li>
 					<li class="active"><a href="#">编辑客户<span class="sr-only">(current)</span></a></li>
+					<li><a href="producteditor.jsp">编辑商品<span class="sr-only">(current)</span></a></li>
 				</ul>
 				<form class="navbar-form navbar-right" role="search">
 					<div class="form-group">

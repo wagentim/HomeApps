@@ -41,18 +41,49 @@
 <body>
 	<%
 			String json_customers = Utils.toJson(DataManager.INSTANE.DB_DATA().getAllEntity(CustomerEntity.class));
+			String json_products = Utils.toJson(DataManager.INSTANE.DB_DATA().getAllEntity(ProductEntity.class));
 	%>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only"></span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">HomeApps</a>
+			</div>
 
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">代购管理系统 <span class="sr-only">(current)</span></a></li>
+					<li><a href="usereditor.jsp">编辑客户<span class="sr-only">(current)</span></a></li>
+					<li><a href="producteditor.jsp">编辑商品<span class="sr-only">(current)</span></a></li>
+				</ul>
+				<form class="navbar-form navbar-right" role="search">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="搜索客户名字">
+					</div>
+					<button type="submit" class="btn btn-default">搜索</button>
+				</form>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
 	<div id="command_list" class="container">
 		<button id="add_order" type="button" class="btn btn-warning"
 			role="button">添加订单</button>
-		<button id="modify_customer" type="button" class="btn btn-success"
-			role="button">编辑客户</button>
 		<hr />
 	</div>
 	<div id='order_list' class='container'></div>
 	<script type="text/javascript">
 		window.json_customer = <%=json_customers %>;
+		window.json_product = <%=json_products %>;
 	</script>
 </body>
 </html>

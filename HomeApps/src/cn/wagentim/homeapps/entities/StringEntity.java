@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="StringEntity")
-public class StringEntity implements Serializable
+public class StringEntity implements Serializable, IEntity
 {
 
     private static final long serialVersionUID = -493076099082116922L;

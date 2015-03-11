@@ -1,22 +1,21 @@
 var order_counter = 0;
-var show_alert_delay_time = 4000;
 var id_customer = "cust";
 var id_product = "prod";
 var customers;
 var auth;
 
 $(document).ready(
-	
+
     function () {
-    	
-        $("button#add_order").click( 
-        		
+
+        $("button#add_order").click(
+
             function ()
             {
                 addOrder();
             }
         );
-        
+
         $("#order_list").on("click", "button#btn_product",
             function()
             {
@@ -25,7 +24,7 @@ $(document).ready(
                 $(this).closest("tr").remove();
             }
         );
-        
+
         $("#order_list").on("click", ".dropdown-menu li a",
                 function()
                 {
@@ -33,7 +32,7 @@ $(document).ready(
         			$(this).parents('.dropdown').find('.dropdown-toggle').html(selText+'<span class="caret"></span>');
                 }
         );
-        
+
         $("button#modify_customer").click(function()
         {
         	window.location.href = "/pages/buymanager/usereditor.jsp";
@@ -66,15 +65,15 @@ function getOrderTitle(id)
     result += "</div>";
     result += "</div>";
     result += "<br />";
-    return result;   
+    return result;
 }
 
-function getOrderTable()
+function getOrderTable(id)
 {
     var result = "";
     result += "<table id='orderTable' class='table table-striped table-hover table-condensed'>";
     result += getTableHeader();
-    result += getTableBody();
+    result += getTableBody(id);
     result += "</table>";
     return result;
 }
@@ -88,24 +87,24 @@ function getTableHeader()
     return result;
 }
 
-function getTableBody()
+function getTableBody(id)
 {
     var result = "";
     result += "<tbody>";
-    result += addRowPair();
+    result += addRowPair(id);
     result += "</tbody>";
     return result;
 }
 
-function addRowPair()
+function addRowPair(id)
 {
     var result = "";
-    result += addRow(true, false);
-    result += addRow(false, true);
+    result += addRow(true, false, id);
+    result += addRow(false, true, id);
     return result;
 }
 
-function addRow(show, is_button)
+function addRow(show, is_button, id)
 {
     var result = "";
     result += ("<tr>");
@@ -115,10 +114,10 @@ function addRow(show, is_button)
     }
     else
     {
-        result += ("<td>" + getDropDown("商品列表") + "</td>");
+        result += ("<td>" + getDropDown("商品列表", id) + "</td>");
     }
-    
-    if (show) 
+
+    if (show)
     {
         result += ("<td>" + getInputLine() + "</td>");
         result += ("<td>" + getInputLine() + "</td>");
@@ -126,8 +125,8 @@ function addRow(show, is_button)
         result += ("<td>" + getInputLine() + "</td>");
         result += ("<td>" + getInputLine() + "</td>");
         result += ("<td>" + getInputLine() + "</td>");
-    } 
-    else 
+    }
+    else
     {
         result += ("<td><label></label></td>");
         result += ("<td><label></label></td>");
@@ -159,6 +158,14 @@ function getDropDown(name, id) {
     		var firstName = window.json_customer[i].firstName;
     		var lastName = window.json_customer[i].lastName;
     		result += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#'>" + lastName + " " + firstName + "</a></li>");
+    	}
+    }
+    else if( id == id_product )
+    {
+    	for(var i = 0; i < window.json_product.length; i++)
+    	{
+    		var name = window.json_product[i].name;
+    		result += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#'>" + name + "</a></li>");
     	}
     }
     result += "</ul></div>";
