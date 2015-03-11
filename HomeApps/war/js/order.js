@@ -29,7 +29,11 @@ $(document).ready(
                 function()
                 {
         			var selText = $(this).text();
+        			var prod_id = $(this).attr('#uid');
         			$(this).parents('.dropdown').find('.dropdown-toggle').html(selText+'<span class="caret"></span>').end().children( '.dropdown-toggle' ).dropdown( 'toggle' );
+        			
+//        			var prod = find_product(prod_id);
+        			
         			return false;
                 }
         );
@@ -122,12 +126,12 @@ function addRow(show, is_button, id)
 
     if (show)
     {
-        result += ("<td>" + getInputLine() + "</td>");
-        result += ("<td>" + getInputLine() + "</td>");
-        result += ("<td>" + getInputLine() + "</td>");
-        result += ("<td>" + getInputLine() + "</td>");
-        result += ("<td>" + getInputLine() + "</td>");
-        result += ("<td>" + getInputLine() + "</td>");
+        result += ("<td>" + getInputLine("sprice") + "</td>");
+        result += ("<td>" + getInputLine("tprice") + "</td>");
+        result += ("<td>" + getInputLine("amount") + "</td>");
+        result += ("<td>" + getInputLine("sweight") + "</td>");
+        result += ("<td>" + getInputLine("tweight") + "</td>");
+        result += ("<td>" + getInputLine("other") + "</td>");
         result += ("<td style='text-align:center;vertical-align: middle'><input type='image' src='/imgs/delete.png' class='delete_product' /></td>");
     }
     else
@@ -144,11 +148,11 @@ function addRow(show, is_button, id)
     return result;
 }
 
-function getInputLine()
+function getInputLine(name)
 {
     var result = "";
     result += "<div class='form-group, input'>";
-    result += "<input type='text' class='form-control' id='input'>";
+    result += "<input type='text' class='form-control " + name + "'>";
     result += "</div>";
     return result;
 }
@@ -162,7 +166,8 @@ function getDropDown(name, id) {
     	{
     		var firstName = window.json_customer[i].firstName;
     		var lastName = window.json_customer[i].lastName;
-    		result += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#'>" + lastName + " " + firstName + "</a></li>");
+    		var uid = window.json_customer[i].id;
+    		result += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#' uid='" + uid + "'>" + lastName + " " + firstName + "</a></li>");
     	}
     }
     else if( id == id_product )
@@ -170,11 +175,24 @@ function getDropDown(name, id) {
     	for(var i = 0; i < window.json_product.length; i++)
     	{
     		var name = window.json_product[i].name;
-    		result += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#'>" + name + "</a></li>");
+    		var uid = window.json_product[i].id;
+    		result += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#' uid='" + uid + "'>" + name + "</a></li>");
     	}
     }
     result += "</ul></div>";
     return result;
+}
+
+function find_product(id)
+{
+	for(var i = 0; i < window.json_product.length; i++)
+	{
+		var uid = window.json_product[i].id;
+		if( uid == id )
+		{
+			return window.json_product[i];
+		}
+	}
 }
 
 function getPrimaryButton(button_name) {
