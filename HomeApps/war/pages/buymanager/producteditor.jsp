@@ -49,14 +49,14 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">HomeApps</a>
+				<a class="navbar-brand" href="order.jsp">HomeApps</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="order.jsp">代购管理系统 <span class="sr-only">(current)</span></a></li>
+					<li><a href="order.jsp">管理订单<span class="sr-only">(current)</span></a></li>
 					<li><a href="usereditor.jsp">编辑客户<span class="sr-only">(current)</span></a></li>
 					<li class="active"><a href="#">编辑商品<span class="sr-only">(current)</span></a></li>
 				</ul>
@@ -147,9 +147,13 @@
 						<label for='defaultprice' class='control-label'
 							style='vertical-align: middle'>默认价格: </label>
 					</div>
-					<div class="col-sm-10">
+					<div class="col-sm-9">
 						<input type="text" class="form-control" id="defaultprice"
 							name="defaultprice" placeholder="默认价格" value="">
+					</div>
+					<div class="col-sm-1">
+						<label for='defaultprice' class='control-label'
+							style='vertical-align: middle'>欧元</label>
 					</div>
 				</div>
 				<br>

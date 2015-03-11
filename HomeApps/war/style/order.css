@@ -3,3 +3,8 @@
 .modal-dialog {
 	max-width: 700px;
 }
+
+div.input {
+	display: table-cell;
+	vertical-align: middle;
+}

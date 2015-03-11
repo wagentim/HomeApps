@@ -19,7 +19,7 @@ $(document).ready(
         $("#order_list").on("click", "button#btn_product",
             function()
             {
-                var row = addRowPair();
+                var row = addRowPair(id_product);
                 $(this).closest("tbody").append(row);
                 $(this).closest("tr").remove();
             }
@@ -32,11 +32,13 @@ $(document).ready(
         			$(this).parents('.dropdown').find('.dropdown-toggle').html(selText+'<span class="caret"></span>');
                 }
         );
-
-        $("button#modify_customer").click(function()
-        {
-        	window.location.href = "/pages/buymanager/usereditor.jsp";
-        });
+        
+        $("#order_list").on("click", ".delete_product",
+                function()
+                {
+        			$(this).closest("tr").remove();
+                }
+        );
     }
 );
 
@@ -82,7 +84,7 @@ function getTableHeader()
 {
     var result = "";
     result += "<thead>"
-    result += "<tr><td>商品</td><td>单价</td><td>数量</td><td>总价</td><td>单重</td><td>总重</td><td>其他</td></tr>"
+    result += "<tr><td>商品</td><td>单价</td><td>数量</td><td>总价</td><td>单重</td><td>总重</td><td>其他</td><td></td></tr>"
     result += "</thead>";
     return result;
 }
@@ -110,11 +112,11 @@ function addRow(show, is_button, id)
     result += ("<tr>");
     if( is_button )
     {
-        result += ("<td>" +  getPrimaryButton("添加商品") + "</td>");
+        result += ("<td style='vertical-align: middle'>" +  getPrimaryButton("添加商品") + "</td>");
     }
     else
     {
-        result += ("<td>" + getDropDown("商品列表", id) + "</td>");
+        result += ("<td style='vertical-align: middle'>" + getDropDown("商品列表", id) + "</td>");
     }
 
     if (show)
@@ -125,6 +127,7 @@ function addRow(show, is_button, id)
         result += ("<td>" + getInputLine() + "</td>");
         result += ("<td>" + getInputLine() + "</td>");
         result += ("<td>" + getInputLine() + "</td>");
+        result += ("<td style='text-align:center;vertical-align: middle'><input type='image' src='/imgs/delete.png' class='delete_product' /></td>");
     }
     else
     {
@@ -133,7 +136,8 @@ function addRow(show, is_button, id)
         result += ("<td><label></label></td>");
         result += ("<td><label></label></td>");
         result += ("<td><label></label></td>");
-        result += ("<td style='text-align:right'>" + getDangerButton("保存") + "</td>");
+        result += ("<td><label></label></td>");
+        result += ("<td style='text-align:right'>" + getSuccessButton("保存订单") + "</td>");
     }
     result += "</tr>";
     return result;
@@ -142,8 +146,8 @@ function addRow(show, is_button, id)
 function getInputLine()
 {
     var result = "";
-    result += "<div class='form-group'>";
-    result += "<input type='text' class='form-control' id='input' disabled>";
+    result += "<div class='form-group, input'>";
+    result += "<input type='text' class='form-control' id='input' style='vertical-align: middle'>";
     result += "</div>";
     return result;
 }
@@ -176,6 +180,6 @@ function getPrimaryButton(button_name) {
     return "<button id='btn_product' type='button' class='btn btn-primary'>" + button_name + "</button>";
 }
 
-function getDangerButton(button_name) {
-    return "<button id='btn_save' type='button' class='btn btn-danger' style='width:90px'>" + button_name + "</button>";
+function getSuccessButton(button_name) {
+    return "<button id='btn_save' type='button' class='btn btn-success' style='width:90px'>" + button_name + "</button>";
 }

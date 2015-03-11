@@ -49,14 +49,14 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">HomeApps</a>
+				<a class="navbar-brand" href="order.jsp">HomeApps</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="order.html">代购管理系统 <span class="sr-only">(current)</span></a></li>
+					<li><a href="order.html">管理订单 <span class="sr-only">(current)</span></a></li>
 					<li class="active"><a href="#">编辑客户<span class="sr-only">(current)</span></a></li>
 					<li><a href="producteditor.jsp">编辑商品<span class="sr-only">(current)</span></a></li>
 				</ul>

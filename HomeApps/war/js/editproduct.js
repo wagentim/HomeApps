@@ -5,12 +5,12 @@ $(document).ready(function(){
 	$(document).ready(function(){
 		$(".list-group").on("click", ".item", function(){
 			selID = $(this).attr("uid");
-//			assignValues();
+			assignValues();
 		});
 	});
 
 	$(".delete").click(function(){
-		deleteCustomer();
+		deleteProduct();
 	});
 
 	$(".list-group").on("click", "a.new", function(){
@@ -20,31 +20,24 @@ $(document).ready(function(){
 });
 
 
-//function assignValues()
-//{
-//	var customer;
-//	for(var i = 0; i < window.json_customer.length; i++)
-//	{
-//		var tmp = JSON.stringify(window.json_customer[i].id);
-//		if( selID == tmp )
-//		{
-//			customer = window.json_customer[i];
-//			break;
-//		}
-//	}
-//	$("#uid").val(customer.id);
-//	$("#alias").val(customer.alias);
-//	$("#telephon").val(customer.telefon);
-//	$("#email").val(customer.email);
-//	$("#country").val(customer.country);
-//	$("#province").val(customer.province);
-//	$("#city").val(customer.city);
-//	$("#zipcode").val(customer.zipcode);
-//	$("#address").val(customer.address);
-//	$("#firstname").val(customer.firstName);
-//	$("#lastname").val(customer.lastName);
-//	$("#pwd").val(customer.pwd);
-//}
+function assignValues()
+{
+	var product;
+	for(var i = 0; i < window.json_product.length; i++)
+	{
+		var tmp = JSON.stringify(window.json_product[i].id);
+		if( selID == tmp )
+		{
+			product = window.json_product[i];
+			break;
+		}
+	}
+	$("#uid").val(product.id);
+	$("#name").val(product.name);
+	$("#categorie").val(product.categorie);
+	$("#defaultprice").val(product.defaultPrice);
+	$("#defaultamount").val(product.defaultAmount);
+}
 
 function reset_form()
 {
@@ -52,7 +45,7 @@ function reset_form()
 	$("input#uid").val("0");
 }
 
-function deleteCustomer()
+function deleteProduct()
 {
     $.ajax(
     {
