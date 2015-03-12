@@ -56,7 +56,7 @@ public interface Constants
     public static final String USER_NAME = "usr";
     public static final String PASSWORD = "pwd";
     public static final String ENTITY = "entity";
-    public static final String ID = "id";
+    public static final String ID = "uid";
 
     //  --------------- Page Constants ---------------
 	public static final String PAGE_LOGIN = "/pages/login.jsp";

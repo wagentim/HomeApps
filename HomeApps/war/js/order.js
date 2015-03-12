@@ -29,15 +29,25 @@ $(document).ready(
                 function()
                 {
         			var selText = $(this).text();
-        			var prod_id = $(this).attr('#uid');
+        			var prod_id = $(this).attr('uid');
         			$(this).parents('.dropdown').find('.dropdown-toggle').html(selText+'<span class="caret"></span>').end().children( '.dropdown-toggle' ).dropdown( 'toggle' );
-        			
-//        			var prod = find_product(prod_id);
-        			
+
+        			var product = find_product(prod_id);
+        			if( product )
+        			{
+        				var row = $(this).closest("tr");
+        				var sp = product.defaultPrice;
+        				var amt = product.defaultAmount;
+        				var tp = amt * sp;
+        				$(row).find(".sprice").val(sp);
+        				$(row).find(".amount").val(amt);
+        				$(row).find(".tprice").val(tp.toFixed(2));
+        			}
+
         			return false;
                 }
         );
-        
+
         $("#order_list").on("click", ".delete_product",
                 function()
                 {
@@ -126,12 +136,12 @@ function addRow(show, is_button, id)
 
     if (show)
     {
-        result += ("<td>" + getInputLine("sprice") + "</td>");
-        result += ("<td>" + getInputLine("tprice") + "</td>");
-        result += ("<td>" + getInputLine("amount") + "</td>");
-        result += ("<td>" + getInputLine("sweight") + "</td>");
-        result += ("<td>" + getInputLine("tweight") + "</td>");
-        result += ("<td>" + getInputLine("other") + "</td>");
+        result += ("<td>" + getInputLine("sprice", "disabled") + "</td>");
+        result += ("<td>" + getInputLine("amount", "") + "</td>");
+        result += ("<td>" + getInputLine("tprice", "") + "</td>");
+        result += ("<td>" + getInputLine("sweight", "") + "</td>");
+        result += ("<td>" + getInputLine("tweight", "") + "</td>");
+        result += ("<td>" + getInputLine("other", "") + "</td>");
         result += ("<td style='text-align:center;vertical-align: middle'><input type='image' src='/imgs/delete.png' class='delete_product' /></td>");
     }
     else
@@ -148,11 +158,11 @@ function addRow(show, is_button, id)
     return result;
 }
 
-function getInputLine(name)
+function getInputLine(name, visible)
 {
     var result = "";
     result += "<div class='form-group, input'>";
-    result += "<input type='text' class='form-control " + name + "'>";
+    result += "<input type='text' class='form-control " + name + "' "+ visible +">";
     result += "</div>";
     return result;
 }
