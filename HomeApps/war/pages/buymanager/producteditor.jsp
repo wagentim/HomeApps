@@ -156,6 +156,20 @@
 							style='vertical-align: middle'>欧元</label>
 					</div>
 				</div>
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label for='nettoweight' class='control-label'
+							style='vertical-align: middle'>商品净重: </label>
+					</div>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="nettoweight" name="nettoweight"
+							placeholder="商品净重" value="" >
+					</div>
+					<div class="col-sm-1">
+						<label for='nettoweight' class='control-label'
+							style='vertical-align: middle'>克</label>
+					</div>
+				</div>
 				<br>
 				<div class="form-group">
 					<div class="col-sm-2">

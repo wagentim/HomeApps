@@ -55,6 +55,7 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="/pages/buymanager/order.jsp">代购管理系统 <span class="sr-only">(current)</span></a></li>
+					<li><a href="/pages/redirection/main.jsp">翻墙网站<span class="sr-only">(current)</span></a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
