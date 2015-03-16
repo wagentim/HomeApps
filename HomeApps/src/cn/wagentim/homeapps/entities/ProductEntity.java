@@ -17,6 +17,8 @@ public final class ProductEntity implements IEntityStatus, IEntity
 	private int categorie;
 	private int defaultAmount;
 	private double defaultPrice;
+	private int nettoWeigth;
+	
     public Long getId()
     {
         return id;
@@ -57,6 +59,14 @@ public final class ProductEntity implements IEntityStatus, IEntity
     {
         this.defaultPrice = defaultPrice;
     }
+	public int getNettoWeigth()
+	{
+		return nettoWeigth;
+	}
+	public void setNettoWeigth(int nettoWeigth)
+	{
+		this.nettoWeigth = nettoWeigth;
+	}
 
 
 }

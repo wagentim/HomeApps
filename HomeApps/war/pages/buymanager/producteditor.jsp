@@ -49,7 +49,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="order.jsp">HomeApps</a>
+				<a class="navbar-brand" href="/pages/home.jsp">HomeApps</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->

@@ -63,6 +63,7 @@ public interface Constants
 	public static final String PAGE_EDIT_USER = "/pages/buymanager/usereditor.jsp";
 	public static final String PAGE_EDIT_PRODUCT = "/pages/buymanager/producteditor.jsp";
 	public static final String PAGE_ORDER = "/pages/buymanager/order.jsp";
+	public static final String PAGE_HOME = "/pages/home.jsp";
 
 	//  --------------- Operation Constants ---------------
 	public static final int OPT_ENTITY_SAVE_OR_UPDATE = 0;
