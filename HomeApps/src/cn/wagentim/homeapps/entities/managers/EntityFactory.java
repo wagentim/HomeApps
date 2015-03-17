@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.wagentim.homeapps.entities.CustomerEntity;
 import cn.wagentim.homeapps.entities.IEntity;
+import cn.wagentim.homeapps.entities.OrderEntity;
 import cn.wagentim.homeapps.entities.ProductEntity;
 import cn.wagentim.homeapps.utils.Constants;
 import cn.wagentim.homeapps.utils.Validator;
@@ -20,12 +21,20 @@ public final class EntityFactory
 				return getCustomerEntity(request);
 			case Constants.ENTITY_PRODUCT:
 			    return getProductEntity(request);
+			case Constants.ENTITY_ORDER:
+			    return getOrder(request);
 			default:
 				return null;
 		}
 	}
 
-	private static ProductEntity getProductEntity(final HttpServletRequest request)
+	private static OrderEntity getOrder(HttpServletRequest request)
+    {
+
+	    return null;
+    }
+
+    private static ProductEntity getProductEntity(final HttpServletRequest request)
     {
         ProductEntity product = new ProductEntity();
 
@@ -45,6 +54,7 @@ public final class EntityFactory
         product.setCategorie(Integer.valueOf(request.getParameter(Constants.PRODUCT_CATEGORIE)));
         product.setDefaultAmount(Integer.valueOf(request.getParameter(Constants.PRODUCT_DEFAULT_AMOUNT)));
         product.setDefaultPrice(Double.valueOf(request.getParameter(Constants.PRODUCT_DEFAULT_PRICE)));
+        product.setNettoWeigth(Integer.valueOf(request.getParameter(Constants.PRODUCT_NETTO_WEIGHT)));
 
         return product;
     }

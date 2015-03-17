@@ -11,6 +11,7 @@
     	<class>cn.wagentim.homeapps.entities.OrderEntity</class>
     	<class>cn.wagentim.homeapps.entities.StringEntity</class>
     	<class>cn.wagentim.homeapps.entities.WebSiteEntity</class>
+    	<class>cn.wagentim.homeapps.entities.OrderItemEntity</class>
     	<exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="datanucleus.NontransactionalRead" value="true"/>

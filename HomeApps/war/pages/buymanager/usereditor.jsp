@@ -56,7 +56,7 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="order.html">管理订单 <span class="sr-only">(current)</span></a></li>
+					<li><a href="order.jsp">管理订单 <span class="sr-only">(current)</span></a></li>
 					<li class="active"><a href="#">编辑客户<span class="sr-only">(current)</span></a></li>
 					<li><a href="producteditor.jsp">编辑商品<span class="sr-only">(current)</span></a></li>
 				</ul>

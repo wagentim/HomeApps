@@ -39,9 +39,13 @@ $(document).ready(
         				var sp = product.defaultPrice;
         				var amt = product.defaultAmount;
         				var tp = amt * sp;
+        				var swt = product.nettoWeigth;
+        				var twt = amt * swt;
         				$(row).find(".sprice").val(sp);
         				$(row).find(".amount").val(amt);
         				$(row).find(".tprice").val(tp.toFixed(2));
+        				$(row).find(".sweight").val(swt);
+        				$(row).find(".tweight").val(twt);
         			}
 
         			return false;

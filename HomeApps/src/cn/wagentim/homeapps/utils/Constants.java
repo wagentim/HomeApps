@@ -44,11 +44,13 @@ public interface Constants
 	public static final String PRODUCT_CATEGORIE = "categorie";
 	public static final String PRODUCT_DEFAULT_PRICE = "defaultprice";
 	public static final String PRODUCT_DEFAULT_AMOUNT = "defaultamount";
+	public static final String PRODUCT_NETTO_WEIGHT = "nettoweight";
 
 	// 	--------------- Entity Constants ---------------
 	public static final String PERSISTENCE_UNIT_NAME = "google";
 	public static final int ENTITY_CUSTOMER = 0;
 	public static final int ENTITY_PRODUCT = 1;
+	public static final int ENTITY_ORDER = 2;
 
 	//  --------------- Parser Constants ---------------
 	public static final String OPERATION = "opt";

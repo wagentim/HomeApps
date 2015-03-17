@@ -48,6 +48,9 @@ public class DataServlet extends HttpServlet
 				    case Constants.ENTITY_PRODUCT:
 				        response.sendRedirect(Constants.PAGE_EDIT_PRODUCT);
 				        break;
+				    case Constants.ENTITY_ORDER:
+				        response.sendRedirect(Constants.PAGE_ORDER);
+				        break;
 				}
 				break;
 			case Constants.OPT_ENTITY_DELETE:

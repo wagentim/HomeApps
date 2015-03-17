@@ -37,6 +37,7 @@ function assignValues()
 	$("#categorie").val(product.categorie);
 	$("#defaultprice").val(product.defaultPrice);
 	$("#defaultamount").val(product.defaultAmount);
+	$("#nettoweight").val(product.nettoWeigth);
 }
 
 function reset_form()
