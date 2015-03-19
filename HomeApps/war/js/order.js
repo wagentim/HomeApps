@@ -30,7 +30,7 @@ $(document).ready(
                 {
         			var selText = $(this).text();
         			var prod_id = $(this).attr('uid');
-        			$(this).parents('.dropdown').find('.dropdown-toggle').html(selText+'<span class="caret"></span>').end().children( '.dropdown-toggle' ).dropdown( 'toggle' );
+        			$(this).parents('.dropdown').find('.dropdown-toggle').html(selText+'<span class="caret" uid="' + prod_id  +'"></span>').end().children( '.dropdown-toggle' ).dropdown( 'toggle' );
 
         			var product = find_product(prod_id);
         			if( product )
@@ -58,8 +58,52 @@ $(document).ready(
         			$(this).closest("tr").remove();
                 }
         );
+
+        $("#order_list").on("click", "#btn_save", function(){
+        	var table = $(this).closest("table");
+        	var order = new Object();
+        	order.id = 0;
+        	var items = [];
+        	table.find('tr').each(function(i){
+        		var id = $(this).find("span").attr("uid");
+        		if (typeof( id ) != "undefined")
+        		{
+        			var $tds = $(this).find('td');
+        			var quantity = $tds.eq(2).find("input").val();
+        			var item = new Object();
+        			item.product = id;
+        			item.amount = quantity;
+        			items.push(item);
+        		}
+        	});
+
+        	order.items = items;
+
+        	sendJsonToDataServlet(order);
+        });
     }
 );
+
+function sendJsonToDataServlet(object)
+{
+	if(object != "undefined")
+	{
+		$.ajax(
+			    {
+			        url : "/data?entity=0&opt=0",
+			        type: "POST",
+			        data : {id: selID},
+			        success:function(data, textStatus, jqXHR)
+			        {
+			        	location.reload();
+			        },
+			        error: function(jqXHR, textStatus, errorThrown)
+			        {
+			        	alert("error");
+			        }
+			    });
+	}
+}
 
 function addOrder()
 {
@@ -76,7 +120,7 @@ function getOrderTitle(id)
     result += "<div id='order'>";
     result += "<div id='order_title' class='row'>";
     result += "<div class='col-sm-3'>";
-    result += getDropDown("选择客户", id);
+    result += getDropDown("选择客户 ", id);
     result += "</div>";
     result += "<div class='col-sm-6'>";
     result += "<lable />";
@@ -135,17 +179,17 @@ function addRow(show, is_button, id)
     }
     else
     {
-        result += ("<td style='vertical-align: middle'>" + getDropDown("商品列表", id) + "</td>");
+        result += ("<td style='vertical-align: middle'>" + getDropDown("商品列表 ", id) + "</td>");
     }
 
     if (show)
     {
         result += ("<td>" + getInputLine("sprice", "disabled") + "</td>");
         result += ("<td>" + getInputLine("amount", "") + "</td>");
-        result += ("<td>" + getInputLine("tprice", "") + "</td>");
-        result += ("<td>" + getInputLine("sweight", "") + "</td>");
-        result += ("<td>" + getInputLine("tweight", "") + "</td>");
-        result += ("<td>" + getInputLine("other", "") + "</td>");
+        result += ("<td>" + getInputLine("tprice", "disabled") + "</td>");
+        result += ("<td>" + getInputLine("sweight", "disabled") + "</td>");
+        result += ("<td>" + getInputLine("tweight", "disabled") + "</td>");
+        result += ("<td>" + getInputLine("other", "disabled") + "</td>");
         result += ("<td style='text-align:center;vertical-align: middle'><input type='image' src='/imgs/delete.png' class='delete_product' /></td>");
     }
     else
@@ -172,7 +216,7 @@ function getInputLine(name, visible)
 }
 
 function getDropDown(name, id) {
-    var result = "<div id='" + id + "' class='dropdown'><button class='btn btn-default dropdown-toggle' type='button' id='menu1' data-toggle='dropdown'>" + name + "<span class='caret'></span></button>";
+    var result = "<div id='" + id + "' class='dropdown'><button class='btn btn-default dropdown-toggle' type='button' id='menu1' data-toggle='dropdown'>" + name + "<span class='caret' uid=0 ></span></button>";
     result += "<ul class='dropdown-menu' role='menu' aria-labelledby='menu1'>";
     if( id == id_customer)
     {
@@ -181,7 +225,7 @@ function getDropDown(name, id) {
     		var firstName = window.json_customer[i].firstName;
     		var lastName = window.json_customer[i].lastName;
     		var uid = window.json_customer[i].id;
-    		result += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#' uid='" + uid + "'>" + lastName + " " + firstName + "</a></li>");
+    		result += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#' uid='" + uid + "'>" + lastName + " " + firstName + " " + "</a></li>");
     	}
     }
     else if( id == id_product )
@@ -190,7 +234,7 @@ function getDropDown(name, id) {
     	{
     		var name = window.json_product[i].name;
     		var uid = window.json_product[i].id;
-    		result += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#' uid='" + uid + "'>" + name + "</a></li>");
+    		result += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#' uid='" + uid + "'>" + name + " " + "</a></li>");
     	}
     }
     result += "</ul></div>";
