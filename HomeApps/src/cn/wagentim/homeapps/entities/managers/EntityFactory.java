@@ -7,9 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import cn.wagentim.homeapps.entities.CustomerEntity;
 import cn.wagentim.homeapps.entities.IEntity;
 import cn.wagentim.homeapps.entities.OrderEntity;
+import cn.wagentim.homeapps.entities.OrderItemEntity;
 import cn.wagentim.homeapps.entities.ProductEntity;
 import cn.wagentim.homeapps.utils.Constants;
+import cn.wagentim.homeapps.utils.JSONUtils;
 import cn.wagentim.homeapps.utils.Validator;
+
+import com.google.appengine.labs.repackaged.org.json.JSONArray;
+import com.google.appengine.labs.repackaged.org.json.JSONException;
+import com.google.appengine.labs.repackaged.org.json.JSONObject;
 
 public final class EntityFactory
 {
@@ -30,8 +36,51 @@ public final class EntityFactory
 
 	private static OrderEntity getOrder(HttpServletRequest request)
     {
+	    OrderEntity order = new OrderEntity();
+	    String jsonData = request.getParameter(Constants.ORDER_CONTENT);
+	    if( Validator.isNullOrEmpty(jsonData) )
+	    {
+	        return null;
+	    }
+	    JSONObject orders = JSONUtils.getJsonObject(jsonData);
+	    try
+        {
+            order.setCustomer(orders.getLong(Constants.ORDER_CUSTOMER));
+            Long orderID = orders.getLong(Constants.ORDER_ID);
+            if( 0L != orderID )
+            {
+                order.setId(orderID);
+            }
+            JSONArray products = orders.getJSONArray(Constants.ORDER_ITEMS);
+            for(int i = 0; i < products.length(); i++)
+            {
+                JSONObject product = products.getJSONObject(i);
+                if( null != product )
+                {
+                    OrderItemEntity item = new OrderItemEntity();
+                    item.setAmount(product.getInt(Constants.ORDER_AMOUNT));
+                    if( 0L != orderID )
+                    {
+                        item.setOrder(orderID);
+                    }
+                    item.setProduct(product.getLong(Constants.ORDER_PRODUCT));
 
-	    return null;
+                    Long orderItemID = product.getLong(Constants.ORDER_ITEM_ID);
+                    if( 0L != orderItemID )
+                    {
+                        item.setId(orderItemID);
+                    }
+
+                    order.addOrderItem(item);
+                }
+            }
+        }
+        catch ( JSONException e )
+        {
+            e.printStackTrace();
+        }
+
+	    return order;
     }
 
     private static ProductEntity getProductEntity(final HttpServletRequest request)

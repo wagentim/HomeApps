@@ -61,6 +61,7 @@ $(document).ready(
 
         $("#order_list").on("click", "#btn_save", function(){
         	var table = $(this).closest("table");
+        	var customer = $(table).find("")
         	var order = new Object();
         	order.id = 0;
         	var items = [];
@@ -78,21 +79,20 @@ $(document).ready(
         	});
 
         	order.items = items;
-
-        	sendJsonToDataServlet(order);
+        	sendJsonToDataServlet(JSON.stringify(order));
         });
     }
 );
 
-function sendJsonToDataServlet(object)
+function sendJsonToDataServlet(data)
 {
-	if(object != "undefined")
+	if(data != "undefined")
 	{
 		$.ajax(
 			    {
-			        url : "/data?entity=0&opt=0",
+			        url : "/data?entity=2&opt=0",
 			        type: "POST",
-			        data : {id: selID},
+			        data : {content:data},
 			        success:function(data, textStatus, jqXHR)
 			        {
 			        	location.reload();

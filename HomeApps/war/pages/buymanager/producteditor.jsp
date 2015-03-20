@@ -75,21 +75,21 @@
 		<div class="list-group col-xs-offset-1 col-xs-2">
 			<a href='#' class='list-group-item active new' style='text-align: center'>+ 新建商品</a>
 		<%
-			String json_products = Utils.toJson(DataManager.INSTANE.DB_DATA().getAllEntity(ProductEntity.class));
+		    String json_products = JSONUtils.toJsonString(DataManager.INSTANE.DB_DATA().getAllEntity(ProductEntity.class));
 
-			if( !Validator.isNullOrEmpty(json_products) )
-			{
-				JSONArray products = Utils.fromJson(json_products);
+									if( !Validator.isNullOrEmpty(json_products) )
+									{
+										JSONArray products = JSONUtils.getJsonArray(json_products);
 
-				if( null != products && products.length() > 0 )
-				{
-					for(int i = 0; i < products.length(); i++)
-					{
-						final JSONObject customer = products.getJSONObject(i);
-						if( null != customer )
-						{
-						    long id = customer.getLong("id");
-						    String name = customer.getString("name");
+										if( null != products && products.length() > 0 )
+										{
+											for(int i = 0; i < products.length(); i++)
+											{
+												final JSONObject customer = products.getJSONObject(i);
+												if( null != customer )
+												{
+												    long id = customer.getLong("id");
+												    String name = customer.getString("name");
 		%>
 							<a href='#' class='list-group-item item' style='text-align: center' onclick="" uid='<%= id %>'><%=name %></a>
 						<%

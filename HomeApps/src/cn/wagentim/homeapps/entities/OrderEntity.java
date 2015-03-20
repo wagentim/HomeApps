@@ -1,6 +1,7 @@
 package cn.wagentim.homeapps.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -56,6 +57,14 @@ public final class OrderEntity implements IEntityStatus, Serializable, IEntity
     public void setItems(List<OrderItemEntity> items)
     {
         this.items = items;
+    }
+    public void addOrderItem(OrderItemEntity item)
+    {
+        if(null == this.items)
+        {
+            this.items = new ArrayList<OrderItemEntity>();
+        }
+        this.items.add(item);
     }
 
 }

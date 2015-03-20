@@ -46,6 +46,15 @@ public interface Constants
 	public static final String PRODUCT_DEFAULT_AMOUNT = "defaultamount";
 	public static final String PRODUCT_NETTO_WEIGHT = "nettoweight";
 
+	//  --------------- Order Constants ---------------
+	public static final String ORDER_CONTENT = "content";
+	public static final String ORDER_CUSTOMER = "customer";
+	public static final String ORDER_ITEMS = "items";
+	public static final String ORDER_PRODUCT = "product";
+	public static final String ORDER_AMOUNT = "amount";
+	public static final String ORDER_ID = "id";
+	public static final String ORDER_ITEM_ID = "item_id";
+
 	// 	--------------- Entity Constants ---------------
 	public static final String PERSISTENCE_UNIT_NAME = "google";
 	public static final int ENTITY_CUSTOMER = 0;
@@ -71,5 +80,4 @@ public interface Constants
 	public static final int OPT_ENTITY_SAVE_OR_UPDATE = 0;
 	public static final int OPT_ENTITY_DELETE = 1;
 	public static final int OPT_ENTITY_GET_ALL = 2;
-
 }

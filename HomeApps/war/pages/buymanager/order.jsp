@@ -40,8 +40,8 @@
 
 <body>
 	<%
-			String json_customers = Utils.toJson(DataManager.INSTANE.DB_DATA().getAllEntity(CustomerEntity.class));
-			String json_products = Utils.toJson(DataManager.INSTANE.DB_DATA().getAllEntity(ProductEntity.class));
+	    String json_customers = JSONUtils.toJsonString(DataManager.INSTANE.DB_DATA().getAllEntity(CustomerEntity.class));
+					String json_products = JSONUtils.toJsonString(DataManager.INSTANE.DB_DATA().getAllEntity(ProductEntity.class));
 	%>
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">

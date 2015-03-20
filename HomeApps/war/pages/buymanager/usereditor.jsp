@@ -75,22 +75,22 @@
 		<div class="list-group col-xs-offset-1 col-xs-2">
 			<a href='#' class='list-group-item active new' style='text-align: center'>+ 新建客户</a>
 		<%
-			String json_customers = Utils.toJson(DataManager.INSTANE.DB_DATA().getAllEntity(CustomerEntity.class));
+		    String json_customers = JSONUtils.toJsonString(DataManager.INSTANE.DB_DATA().getAllEntity(CustomerEntity.class));
 
-			if( !Validator.isNullOrEmpty(json_customers) )
-			{
-				JSONArray customers = Utils.fromJson(json_customers);
+									if( !Validator.isNullOrEmpty(json_customers) )
+									{
+										JSONArray customers = JSONUtils.getJsonArray(json_customers);
 
-				if( null != customers && customers.length() > 0 )
-				{
-					for(int i = 0; i < customers.length(); i++)
-					{
-						final JSONObject customer = customers.getJSONObject(i);
-						if( null != customer )
-						{
-						    long id = customer.getLong("id");
-						    String lastName = customer.getString("lastName");
-						    String firstName = customer.getString("firstName");
+										if( null != customers && customers.length() > 0 )
+										{
+											for(int i = 0; i < customers.length(); i++)
+											{
+												final JSONObject customer = customers.getJSONObject(i);
+												if( null != customer )
+												{
+												    long id = customer.getLong("id");
+												    String lastName = customer.getString("lastName");
+												    String firstName = customer.getString("firstName");
 		%>
 							<a href='#' class='list-group-item item' style='text-align: center' onclick="" uid='<%= id %>'><%=lastName %> <%=firstName %></a>
 						<%
