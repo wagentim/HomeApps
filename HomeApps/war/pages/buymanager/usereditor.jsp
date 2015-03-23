@@ -232,9 +232,8 @@
 
 	<script type="text/javascript">
 		window.json_customer = <%=json_customers %>;
-	</script>
-	<script type="text/javascript">
 		window.json_districts ={};
 	</script>
+
 </body>
 </html>

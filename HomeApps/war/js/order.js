@@ -61,7 +61,7 @@ $(document).ready(
 
         $("#order_list").on("click", "#btn_save", function(){
         	var table = $(this).closest("table");
-        	var customer = $(table).find("")
+        	var customer = $(table).find("#id_customer").find("span").Attr("uid");
         	var order = new Object();
         	order.id = 0;
         	var items = [];
@@ -114,18 +114,21 @@ function addOrder()
     $("div#order_list").append(result);
 }
 
-function getOrderTitle(id)
+function getOrderTitle(id, order_id)
 {
     var result = "";
     result += "<div id='order'>";
     result += "<div id='order_title' class='row'>";
-    result += "<div class='col-sm-3'>";
+    result += "<div class='col-sm-2'>";
     result += getDropDown("选择客户 ", id);
     result += "</div>";
-    result += "<div class='col-sm-6'>";
+    result += "<div class='col-sm-2'>";
+    result += "<a>订单号: " + order_id + "</a>";
+    result += "</div>";
+    result += "<div class='col-sm-5'>";
     result += "<lable />";
     result += "</div>";
-    result += "<div class='col-sm-3'>总额: ";
+    result += "<div class='col-sm-1'>总额: ";
     result += "</div>";
     result += "</div>";
     result += "</div>";

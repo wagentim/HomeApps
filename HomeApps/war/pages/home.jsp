@@ -21,7 +21,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="style/page.css">
-<link rel="stylesheet" href="style/order.css">
+<link rel="stylesheet" href="style/home.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script
@@ -62,5 +62,16 @@
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
+	<div class="container col-xs-offset-1 col-xs-10 white_board">
+		<div class="container col-xs-offset-1 col-xs-10 msg_show">
+			<p><h4>留言和备忘录</h4></p>
+			<hr />
+		</div>
+		<textArea class="container col-xs-offset-1 col-xs-10" rows="3">
+		</textArea>
+		<div class="col-xs-offset-10 col-xs-2">
+			<button type=button class="btn btn-success save">提交</button>
+		</div>
+	</div>
 </body>
 </html>
