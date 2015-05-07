@@ -80,4 +80,17 @@ public interface Constants
 	public static final int OPT_ENTITY_SAVE_OR_UPDATE = 0;
 	public static final int OPT_ENTITY_DELETE = 1;
 	public static final int OPT_ENTITY_GET_ALL = 2;
+	public static final int OPT_START_GRABBING = 3;
+	public static final int OPT_GET_GRABBING_STATUS = 4;
+	public static final int OPT_STOP_GRABBING = 5;
+	
+	
+	//  --------------- Operation Name ---------------
+	public static final String OPT_NAME_ENTITY_SAVE_OR_UPDATE = "ENTITY_SAVE_OR_UPDATE";
+	public static final String OPT_NAME_ENTITY_DELETE = "OPT_ENTITY_DELETE";
+	public static final String OPT_NAME_ENTITY_GET_ALL = "OPT_ENTITY_GET_ALL";
+	public static final String OPT_NAME_UNKNOWN = "OPT_UNKNOWN";
+	public static final String OPT_NAME_START_GRABBING = "OPT_START_GRABBING";
+	public static final String OPT_NAME_GET_GRABBING_STATUS = "OPT_GET_GRABBING_STATUS";
+	public static final String OPT_NAME_STOP_GRABBING = "OPT_STOP_GRABBING";
 }
