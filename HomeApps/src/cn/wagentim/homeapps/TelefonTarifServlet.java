@@ -30,7 +30,7 @@ public class TelefonTarifServlet extends HttpServlet
 				IWebsite site = (IWebsite) instance.newInstance();
 				out.print("Executing " + site.getName() + ", please wait...");
 				out.flush();
-				String result = site.getHandler().exec();
+//				String result = site.getHandler().exec();
 				
 			} catch (InstantiationException | IllegalAccessException e)
 			{

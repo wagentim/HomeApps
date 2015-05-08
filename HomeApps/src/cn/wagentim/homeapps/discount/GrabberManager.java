@@ -2,10 +2,9 @@ package cn.wagentim.homeapps.discount;
 
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.logging.Logger;
 
 import cn.wagentim.homeapps.discount.handlers.BabyMarketHandler;
-import cn.wagentim.homeapps.entities.managers.CachedDataManager;
+import cn.wagentim.homeapps.discount.handlers.ISiteHandler;
 
 /**
  * The Grabber Manager controller the whole grabbing life cycle
@@ -21,12 +20,12 @@ public final class GrabberManager
 	
 	private static final ConcurrentLinkedQueue<IGrabberListener> listeners = new ConcurrentLinkedQueue<IGrabberListener>();
 	private static final GrabberManager manager = new GrabberManager();
-	private Logger logger = Logger.getLogger(GrabberManager.class.getSimpleName());
 	private static final int STATUS_IDLE = 0x00;
 	private static final int STATUS_PROCESSING = 0x01;
 	private int status = STATUS_IDLE;
-	
+	private ISiteHandler currHandler = null;
 	private GrabberManager(){}
+	private volatile boolean shouldStop = false;
 	
 	public static GrabberManager INSTANCE()
 	{
@@ -37,12 +36,29 @@ public final class GrabberManager
 	{
 		if(STATUS_PROCESSING == status)
 		{
-			logger.info("Grabber is already started. You can only stop or check its logging messages");
+			sendMessage("Grabber is already started. You can only stop or check its logging messages");
 			return -1;
 		}
 		
 		status = STATUS_PROCESSING;
-		logger.info("Start Grabber...");
+
+		try
+		{
+			for (int i = 0; i < handlers.length; i++)
+			{
+				if( !shouldStop )
+				{
+					ISiteHandler handler = (ISiteHandler) handlers[i].newInstance();
+					handler.setListeners(listeners);
+					currHandler = handler;
+					handler.exec();
+				}
+			}
+		} 
+		catch (InstantiationException | IllegalAccessException e)
+		{
+			e.printStackTrace();
+		}
 		
 		return 0;
 	}
@@ -62,27 +78,49 @@ public final class GrabberManager
 		return false;
 	}
 	
-	public void addGrabberListener(IGrabberListener listener)
+	public synchronized void addGrabberListener(IGrabberListener listener)
 	{
 		if( null != listener )
 		{
 			if( !findListener(listener) )
 			{
 				listeners.add(listener);
-				updateListener();
+				if( null != currHandler )
+				{
+					currHandler.addGrabberListener(listener);
+				}
 			}
 		}
 	}
 	
-	public void removeGrabberListener(IGrabberListener listener)
+	public synchronized void removeGrabberListener(IGrabberListener listener)
 	{
 		if( null != listener )
 		{
 			if( findListener(listener) )
 			{
 				listeners.remove(listeners);
-				updateListener();
+				if( null != currHandler )
+				{
+					currHandler.removeGrabberListener(listener);
+				}
 			}
 		}
+	}
+	
+	protected void sendMessage(String message)
+	{
+		Iterator<IGrabberListener> it = listeners.iterator();
+		
+		while(it.hasNext())
+		{
+			((IGrabberListener)it.next()).currentMessage(message);
+		}
+	}
+
+	public synchronized void stop()
+	{
+		shouldStop = true;
+		status = STATUS_IDLE;
 	}
 }

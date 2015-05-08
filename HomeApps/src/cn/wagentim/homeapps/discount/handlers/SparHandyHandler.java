@@ -7,7 +7,6 @@ import org.apache.http.client.utils.URIBuilder;
 
 import cn.wagentim.connecthelper.connector.GetPageContent;
 import cn.wagentim.homeapps.discount.webs.IWebsite;
-import cn.wagentim.homeapps.discount.webs.SparHandy;
 import cn.wagentim.homeapps.entities.StringEntity;
 import cn.wagentim.homeapps.entities.managers.DataManager;
 import cn.wagentim.homeapps.utils.StringConstants;
@@ -17,16 +16,10 @@ public class SparHandyHandler extends AbstractSiteHandler
 {
     private Long id = 0L;
 
-	public SparHandyHandler(final IWebsite site)
-	{
-		super(site);
-	}
-
 	@Override
-	public String exec()
+	public void exec()
 	{
 		grabDiscountPicOnMainPage();
-		return formatResult();
 	}
 
 	public void grabDiscountPicOnMainPage()
@@ -75,7 +68,7 @@ public class SparHandyHandler extends AbstractSiteHandler
 
 	public static void main(String[] args)
 	{
-	    SparHandyHandler handler = new SparHandyHandler(new SparHandy());
+	    SparHandyHandler handler = new SparHandyHandler();
 
 	    handler.grabDiscountPicOnMainPage();
 	    handler.parserDiscountPicOnMainPage();
@@ -84,6 +77,12 @@ public class SparHandyHandler extends AbstractSiteHandler
     private String formatResult()
 	{
 		return null;
+	}
+
+	@Override
+	public void setSite(IWebsite site) 
+	{
+		this.site = site;
 	}
 
 }

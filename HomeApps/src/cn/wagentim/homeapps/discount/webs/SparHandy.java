@@ -55,7 +55,7 @@ public class SparHandy implements IWebsite
 	@Override
 	public ISiteHandler getHandler()
 	{
-		return new SparHandyHandler(this);
+		return new SparHandyHandler();
 	}
 
 	@Override

@@ -16,8 +16,6 @@ public class AppUtils
 					return Constants.OPT_NAME_ENTITY_GET_ALL;
 				case Constants.OPT_START_GRABBING:
 					return Constants.OPT_NAME_START_GRABBING;
-				case Constants.OPT_GET_GRABBING_STATUS:
-					return Constants.OPT_NAME_GET_GRABBING_STATUS;
 				case Constants.OPT_STOP_GRABBING:
 					return Constants.OPT_NAME_STOP_GRABBING;
 			}
