@@ -25,6 +25,7 @@ public class DataServlet extends HttpServlet
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException
 	{
+		doPost(req, resp);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

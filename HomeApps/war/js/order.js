@@ -1,6 +1,7 @@
 var order_counter = 0;
 var id_customer = "cust";
 var id_product = "prod";
+var id_status = "order_status";
 var customers;
 var auth;
 
@@ -61,7 +62,7 @@ $(document).ready(
 
         $("#order_list").on("click", "#btn_save", function(){
         	var table = $(this).closest("table");
-        	var customer = $(table).find("#id_customer").find("span").Attr("uid");
+        	var customer = $(table).find("#customer").find("span").Attr("uid");
         	var order = new Object();
         	order.id = 0;
         	var items = [];
@@ -202,7 +203,7 @@ function addRow(show, is_button, id)
         result += ("<td><label></label></td>");
         result += ("<td><label></label></td>");
         result += ("<td><label></label></td>");
-        result += ("<td><label></label></td>");
+        result += ("<td style='text-align:right'>"+ getDropDown("订单状态", id_status) +"</td>");
         result += ("<td style='text-align:right'>" + getSuccessButton("保存订单") + "</td>");
     }
     result += "</tr>";
@@ -240,6 +241,15 @@ function getDropDown(name, id) {
     		result += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#' uid='" + uid + "'>" + name + " " + "</a></li>");
     	}
     }
+    else if( id == id_status )
+    {
+    	var status = getStatusList();
+    	
+    	for( var i = 0; i < status.length; i++)
+    	{
+    		result += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#'>" + status[i] + "</a></li>");
+    	}
+    }
     result += "</ul></div>";
     return result;
 }
@@ -256,10 +266,19 @@ function find_product(id)
 	}
 }
 
-function getPrimaryButton(button_name) {
+function getStatusList()
+{
+	var status = ["订单状态", "确认订单", "购买商品", "准备发货", "货物已发", "确认收款", "订单结束"];
+	
+	return status;
+}
+
+function getPrimaryButton(button_name) 
+{
     return "<button id='btn_product' type='button' class='btn btn-primary'>" + button_name + "</button>";
 }
 
-function getSuccessButton(button_name) {
+function getSuccessButton(button_name) 
+{
     return "<button id='btn_save' type='button' class='btn btn-success' style='width:90px'>" + button_name + "</button>";
 }

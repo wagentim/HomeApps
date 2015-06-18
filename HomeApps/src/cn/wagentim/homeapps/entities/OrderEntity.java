@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="OrderEntity")
-public final class OrderEntity implements IEntityStatus, Serializable, IEntity
+public final class OrderEntity implements IEntityConstants, Serializable, IEntity
 {
 
 	private static final long serialVersionUID = -6424192667756126476L;

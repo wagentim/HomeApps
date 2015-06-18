@@ -21,7 +21,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="/js/login.js"></script>
-<title>家用应用服务 - 用户登录</title>
+<title>å®¶ç”¨åº”ç”¨æœ�åŠ¡ - ç”¨æˆ·ç™»å½•</title>
 </head>
 <body>
 <%
@@ -33,17 +33,25 @@
 
 	if (!Validator.isNullOrEmpty(userName) && !Validator.isNullOrEmpty(password))
 	{
-		String md5 = Auth.getMD5Encode(userName, password);
-		DataManager.INSTANE.CACHE_DATA().addNewAuth(md5);
-		HttpSession newSession = request.getSession(true);
-		newSession.setAttribute(Constants.AUTH, md5);
-		newSession.setMaxInactiveInterval(Auth.MAX_SESSION_TIME_OUT);
-		response.sendRedirect(Constants.PAGE_ORDER);
+		if( Validator.checkUser(userName, password) )
+		{
+			String md5 = Auth.getMD5Encode(userName, password);
+			DataManager.INSTANE.CACHE_DATA().addNewAuth(md5);
+			HttpSession newSession = request.getSession(true);
+			newSession.setAttribute(Constants.AUTH, md5);
+			newSession.setMaxInactiveInterval(Auth.MAX_SESSION_TIME_OUT);
+			response.sendRedirect(Constants.PAGE_ORDER);
+		}
+		else
+		{
+			response.sendRedirect(Constants.PAGE_REGISTER);
+		}
+			
 	}
 %>
 <div class="login_block">
 		<div class="login_title">
-			<h2>用户登录</h2>
+			<h2>Login In</h2>
 		</div>
 		<hr />
 		<form id="login_form" class="form-horizontal" role="form"
@@ -55,7 +63,7 @@
 				</div>
 				<div class="col-sm-11">
 					<input type="text" class="form-control" id="usr" name="<%=TAG_USER_NAME%>"
-						placeholder="请输入用户名">
+						placeholder="è¯·è¾“å…¥ç”¨æˆ·å��">
 				</div>
 			</div>
 			<div class="form-group">
@@ -65,18 +73,18 @@
 				</div>
 				<div class="col-sm-11">
 					<input type="password" class="form-control" id="pwd" name="<%= TAG_PASSWORD %>"
-						placeholder="请输入密码">
+						placeholder="è¯·è¾“å…¥å¯†ç �">
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-1 col-sm-11">
-					<button id="login_btn" type="submit" class="btn btn-primary">登录</button>
+					<button id="login_btn" type="submit" class="btn btn-primary">ç™»å½•</button>
 				</div>
 			</div>
 		</form>
 		<hr />
 		<div hidden=true>
-			<a href="#">忘记密码?</a>
+			<a href="#">å¿˜è®°å¯†ç �?</a>
 		</div>
 	</div>
 </body>

@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="GrabbedProductEnt")
-public final class GrabbedProductEntity implements IEntityStatus, IEntity
+public final class GrabbedProductEntity implements IEntityConstants, IEntity
 {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

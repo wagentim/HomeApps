@@ -3,6 +3,8 @@ package cn.wagentim.homeapps.utils;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 
+import cn.wagentim.homeapps.entities.managers.DataManager;
+
 
 
 public final class Validator
@@ -61,4 +63,10 @@ public final class Validator
 
 		return true;
 	}
+	
+	public static boolean checkUser(final String username, final String password)
+	{
+		return DataManager.INSTANE.DB_DATA().checkUser(username, password);
+	}
+	
 }

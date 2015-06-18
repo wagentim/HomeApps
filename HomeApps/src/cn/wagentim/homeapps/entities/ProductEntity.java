@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ProductEntity")
-public final class ProductEntity implements IEntityStatus, IEntity
+public final class ProductEntity implements IEntityConstants, IEntity
 {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

@@ -10,7 +10,7 @@ import javax.persistence.Query;
 
 import cn.wagentim.homeapps.entities.OrderEntity;
 
-public class OrderManager implements IOrderStatement
+public class OrderManager implements IStatement
 {
 	private final String PERSISTENCE_UNIT_NAME = "transactions-optional";
 	/** Data Format <Customer, List<Order>> */
