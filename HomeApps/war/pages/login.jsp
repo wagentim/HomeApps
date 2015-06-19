@@ -21,7 +21,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="/js/login.js"></script>
-<title>å®¶ç”¨åº”ç”¨æœ�åŠ¡ - ç”¨æˆ·ç™»å½•</title>
+<title>Home Apps - Login</title>
 </head>
 <body>
 <%
@@ -46,7 +46,6 @@
 		{
 			response.sendRedirect(Constants.PAGE_REGISTER);
 		}
-			
 	}
 %>
 <div class="login_block">
@@ -63,7 +62,7 @@
 				</div>
 				<div class="col-sm-11">
 					<input type="text" class="form-control" id="usr" name="<%=TAG_USER_NAME%>"
-						placeholder="è¯·è¾“å…¥ç”¨æˆ·å��">
+						placeholder="User Name">
 				</div>
 			</div>
 			<div class="form-group">
@@ -73,12 +72,12 @@
 				</div>
 				<div class="col-sm-11">
 					<input type="password" class="form-control" id="pwd" name="<%= TAG_PASSWORD %>"
-						placeholder="è¯·è¾“å…¥å¯†ç �">
+						placeholder="Password">
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-1 col-sm-11">
-					<button id="login_btn" type="submit" class="btn btn-primary">ç™»å½•</button>
+					<button id="login_btn" type="submit" class="btn btn-primary">Login</button>
 				</div>
 			</div>
 		</form>

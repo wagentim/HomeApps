@@ -45,33 +45,35 @@ public final class EntityFactory
 	    JSONObject orders = JSONUtils.getJsonObject(jsonData);
 	    try
         {
-            order.setCustomer(orders.getLong(Constants.ORDER_CUSTOMER));
             Long orderID = orders.getLong(Constants.ORDER_ID);
             if( 0L != orderID )
             {
                 order.setId(orderID);
             }
             JSONArray products = orders.getJSONArray(Constants.ORDER_ITEMS);
+            
             for(int i = 0; i < products.length(); i++)
             {
                 JSONObject product = products.getJSONObject(i);
+                
                 if( null != product )
                 {
                     OrderItemEntity item = new OrderItemEntity();
+                    Long id = product.getLong(Constants.ORDER_ITEM_ID);
+                    
+                    if( null != id && 0 != id)
+                    {
+                    	item.setId(id);
+                    }
+                    
                     item.setAmount(product.getInt(Constants.ORDER_AMOUNT));
-                    if( 0L != orderID )
-                    {
-                        item.setOrder(orderID);
-                    }
                     item.setProduct(product.getLong(Constants.ORDER_PRODUCT));
-
-                    Long orderItemID = product.getLong(Constants.ORDER_ITEM_ID);
-                    if( 0L != orderItemID )
-                    {
-                        item.setId(orderItemID);
-                    }
-
-                    order.addOrderItem(item);
+                    item.setSinglePrice(product.getDouble(Constants.ORDER_SINGLE_PRICE));
+                    item.setTotalPrice(product.getDouble(Constants.ORDER_TOTAL_PRICE));
+                    item.setSingleWeight(product.getDouble(Constants.ORDER_SINGLE_WEIGHT));
+                    item.setTotalWeight(product.getDouble(Constants.ORDER_TOTAL_WEIGHT));
+                    item.setOthers(product.getString(Constants.ORDER_OTHER));
+                    order.addOrderItem(DataManager.INSTANE.DB_DATA().addOrModifyData(item, item.getId()));
                 }
             }
         }
@@ -96,7 +98,10 @@ public final class EntityFactory
         else
         {
             Long id = Long.valueOf(prodID);
-            product.setId(id);
+            if( 0L != id )
+            {
+            	product.setId(id);
+            }
         }
 
         product.setName(request.getParameter(Constants.PRODUCT_NAME));
@@ -123,7 +128,10 @@ public final class EntityFactory
     	else
     	{
     		Long id = Long.valueOf(userID[0]);
-    		customer.setId(id);
+    		if( 0L != id )
+    		{
+    			customer.setId(id);
+    		}
     	}
 
     	customer.setAlias(parameters.get(Constants.CUSTOMER_ALISA)[0]);
@@ -136,6 +144,7 @@ public final class EntityFactory
     	customer.setCity(parameters.get(Constants.CUSTOMER_CITY)[0]);
     	customer.setZipcode(parameters.get(Constants.CUSTOMER_ZIPCODE)[0]);
     	customer.setAddress(parameters.get(Constants.CUSTOMER_ADDRESS)[0]);
+    	customer.setPwd(parameters.get(Constants.PASSWORD)[0]);
 
     	return customer;
 	}

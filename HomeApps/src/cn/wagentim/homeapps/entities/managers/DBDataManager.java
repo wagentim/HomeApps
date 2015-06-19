@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import cn.wagentim.homeapps.entities.IDEntity;
 import cn.wagentim.homeapps.entities.IEntity;
 import cn.wagentim.homeapps.entities.IEntityConstants;
+import cn.wagentim.homeapps.entities.OrderEntity;
 import cn.wagentim.homeapps.utils.Constants;
 import cn.wagentim.homeapps.utils.StatementHelper;
 

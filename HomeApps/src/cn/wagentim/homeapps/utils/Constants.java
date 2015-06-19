@@ -53,7 +53,12 @@ public interface Constants
 	public static final String ORDER_PRODUCT = "product";
 	public static final String ORDER_AMOUNT = "amount";
 	public static final String ORDER_ID = "id";
-	public static final String ORDER_ITEM_ID = "item_id";
+	public static final String ORDER_ITEM_ID = "id";
+	public static final String ORDER_SINGLE_PRICE = "sprice";
+	public static final String ORDER_TOTAL_PRICE = "tprice";
+	public static final String ORDER_SINGLE_WEIGHT = "sweight";
+	public static final String ORDER_TOTAL_WEIGHT = "tweight";
+	public static final String ORDER_OTHER = "other";
 
 	// 	--------------- Entity Constants ---------------
 	public static final String PERSISTENCE_UNIT_NAME = "google";

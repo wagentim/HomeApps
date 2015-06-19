@@ -40,12 +40,15 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="/pages/regist.jsp">Register New User<span class="sr-only">(current)</span></a></li>
+					<li><a href="/pages/login.jsp">Login<span class="sr-only"></span></a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
+	
+	<br />
 	
 	<div class="container col-xs-offset-1 col-xs-8 edit">
 			<form class="form-horizontal myform" role="form" action="/data?entity=0&opt=0" method="POST">
@@ -100,7 +103,7 @@
 				<div class="form-group">
 					<div class="col-sm-2">
 						<label for='telephon' class='control-label'
-							style='vertical-align: middle'>Telefon Number: </label>
+							style='vertical-align: middle'>Telefon: </label>
 					</div>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="telephon"
@@ -168,7 +171,7 @@
 					<div class="col-sm-2">
 						<button type="button" class="btn btn-danger delete">Clear</button>
 					</div>
-					<div class="col-sm-offset-11 save">
+					<div class="col-sm-offset-2 save">
 						<button type=submit class="btn btn-success save">Save</button>
 					</div>
 				</div>

@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,8 +21,7 @@ public final class OrderEntity implements IEntityConstants, Serializable, IEntit
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private Long customer;
-	@OneToMany
-	private List<OrderItemEntity> items;
+	private List<Long> items;
 	private int status;
 
 	public Long getCustomer()
@@ -50,19 +48,19 @@ public final class OrderEntity implements IEntityConstants, Serializable, IEntit
     {
         this.id = id;
     }
-    public List<OrderItemEntity> getItems()
+    public List<Long> getItems()
     {
         return items;
     }
-    public void setItems(List<OrderItemEntity> items)
+    public void setItems(List<Long> items)
     {
         this.items = items;
     }
-    public void addOrderItem(OrderItemEntity item)
+    public void addOrderItem(Long item)
     {
         if(null == this.items)
         {
-            this.items = new ArrayList<OrderItemEntity>();
+            this.items = new ArrayList<Long>();
         }
         this.items.add(item);
     }

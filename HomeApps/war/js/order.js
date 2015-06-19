@@ -62,19 +62,24 @@ $(document).ready(
 
         $("#order_list").on("click", "#btn_save", function(){
         	var table = $(this).closest("table");
-        	var customer = $(table).find("#customer").find("span").Attr("uid");
         	var order = new Object();
         	order.id = 0;
         	var items = [];
-        	table.find('tr').each(function(i){
-        		var id = $(this).find("span").attr("uid");
-        		if (typeof( id ) != "undefined")
+        	table.find('tbody > tr').each(function(i){
+        		var productID = $(this).find("span").attr("uid");
+        		var item_id = $(this).attr("item_id");
+        		if (typeof( productID ) != "undefined" && productID != 0)
         		{
         			var $tds = $(this).find('td');
-        			var quantity = $tds.eq(2).find("input").val();
         			var item = new Object();
-        			item.product = id;
-        			item.amount = quantity;
+        			item.item_id = item_id;
+        			item.product = productID;
+        			item.sprice = $tds.eq(1).find("input").val();
+        			item.amount = $tds.eq(2).find("input").val();
+        			item.tprice = $tds.eq(3).find("input").val();
+        			item.sweight = $tds.eq(4).find("input").val();
+        			item.tweight = $tds.eq(5).find("input").val();
+        			item.other = $tds.eq(6).find("input").val();
         			items.push(item);
         		}
         	});
@@ -96,7 +101,7 @@ function sendJsonToDataServlet(data)
 			        data : {content:data},
 			        success:function(data, textStatus, jqXHR)
 			        {
-			        	location.reload();
+//			        	location.reload();
 			        },
 			        error: function(jqXHR, textStatus, errorThrown)
 			        {
@@ -176,24 +181,25 @@ function addRowPair(id)
 function addRow(show, is_button, id)
 {
     var result = "";
-    result += ("<tr>");
     if( is_button )
     {
+    	result += ("<tr>");
         result += ("<td style='vertical-align: middle'>" +  getPrimaryButton("添加商品") + "</td>");
     }
     else
     {
+    	result += ("<tr item_id=0>");
         result += ("<td style='vertical-align: middle'>" + getDropDown("商品列表 ", id) + "</td>");
     }
 
     if (show)
     {
-        result += ("<td>" + getInputLine("sprice", "disabled") + "</td>");
+        result += ("<td>" + getInputLine("sprice", "") + "</td>");
         result += ("<td>" + getInputLine("amount", "") + "</td>");
-        result += ("<td>" + getInputLine("tprice", "disabled") + "</td>");
-        result += ("<td>" + getInputLine("sweight", "disabled") + "</td>");
-        result += ("<td>" + getInputLine("tweight", "disabled") + "</td>");
-        result += ("<td>" + getInputLine("other", "disabled") + "</td>");
+        result += ("<td>" + getInputLine("tprice", "") + "</td>");
+        result += ("<td>" + getInputLine("sweight", "") + "</td>");
+        result += ("<td>" + getInputLine("tweight", "") + "</td>");
+        result += ("<td>" + getInputLine("other", "") + "</td>");
         result += ("<td style='text-align:center;vertical-align: middle'><input type='image' src='/imgs/delete.png' class='delete_product' /></td>");
     }
     else
