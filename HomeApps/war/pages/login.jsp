@@ -1,7 +1,5 @@
-<%@page import="cn.wagentim.homeapps.entities.CustomerEntity"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<%@ page import="cn.wagentim.homeapps.auth.*, cn.wagentim.homeapps.entities.managers.*, cn.wagentim.homeapps.utils.*" %>
+<%@ page import="cn.wagentim.homeapps.entities.CustomerEntity, cn.wagentim.homeapps.auth.*, cn.wagentim.homeapps.entities.managers.*, cn.wagentim.homeapps.utils.*, java.util.List" %>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -33,10 +31,12 @@
 
 	if (!Validator.isNullOrEmpty(userName) && !Validator.isNullOrEmpty(password))
 	{
-		if( Validator.checkUser(userName, password) )
+		List<CustomerEntity> customers = Validator.checkUser(userName, password); 
+	
+		if( customers.size() > 0 )
 		{
 			String md5 = Auth.getMD5Encode(userName, password);
-			DataManager.INSTANE.CACHE_DATA().addNewAuth(md5);
+			DataManager.INSTANE.CACHE_DATA().addNewAuth(customers.get(0).getId(), md5);
 			HttpSession newSession = request.getSession(true);
 			newSession.setAttribute(Constants.AUTH, md5);
 			newSession.setMaxInactiveInterval(Auth.MAX_SESSION_TIME_OUT);
@@ -86,6 +86,5 @@
 			<a href="#">å¿˜è®°å¯†ç �?</a>
 		</div>
 	</div>
-</body>
 </body>
 </html>

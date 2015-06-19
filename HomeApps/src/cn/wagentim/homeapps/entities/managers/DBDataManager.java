@@ -8,10 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import cn.wagentim.homeapps.entities.CustomerEntity;
 import cn.wagentim.homeapps.entities.IDEntity;
 import cn.wagentim.homeapps.entities.IEntity;
 import cn.wagentim.homeapps.entities.IEntityConstants;
-import cn.wagentim.homeapps.entities.OrderEntity;
 import cn.wagentim.homeapps.utils.Constants;
 import cn.wagentim.homeapps.utils.StatementHelper;
 
@@ -91,20 +91,15 @@ public class DBDataManager implements IStatement, IEntityConstants
         return result.get(0);
 	}
 
-	public synchronized boolean checkUser(String username, String password)
+	public synchronized List<CustomerEntity> checkUser(String username, String password)
 	{
-		List<IDEntity> result = null;
+		List<CustomerEntity> result = null;
 		Query q = em.createQuery(GET_USER_BY_USERNAME_AND_PASSWORD);
 		q.setParameter("username", username);
 		q.setParameter("password", password);
 		result = q.getResultList();
         
-        if( result.isEmpty() )
-        {
-        	return false;
-        }
-
-		return true;
+		return result;
 	}
 
 }

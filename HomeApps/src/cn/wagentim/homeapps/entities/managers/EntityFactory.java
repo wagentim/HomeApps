@@ -50,6 +50,9 @@ public final class EntityFactory
             {
                 order.setId(orderID);
             }
+            Long customer = orders.getLong(Constants.ORDER_CUSTOMER);
+            order.setCustomer(customer);
+            
             JSONArray products = orders.getJSONArray(Constants.ORDER_ITEMS);
             
             for(int i = 0; i < products.length(); i++)

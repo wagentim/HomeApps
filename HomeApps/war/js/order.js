@@ -64,6 +64,7 @@ $(document).ready(
         	var table = $(this).closest("table");
         	var order = new Object();
         	order.id = 0;
+        	order.customer = window.userID;
         	var items = [];
         	table.find('tbody > tr').each(function(i){
         		var productID = $(this).find("span").attr("uid");

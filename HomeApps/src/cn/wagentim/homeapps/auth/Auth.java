@@ -94,4 +94,17 @@ public final class Auth
 
 	    return StringConstants.EMPTY_STRING;
 	}
+	
+	public static String getSession(final HttpServletRequest request)
+	{
+		HttpSession session = request.getSession(false);
+
+        if( null == session )
+        {
+        	logger.log(Level.INFO, "Session is null");
+            return null;
+        }
+        
+        return (String) session.getAttribute(Constants.AUTH);
+	}
 }

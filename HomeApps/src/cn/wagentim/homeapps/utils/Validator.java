@@ -1,8 +1,11 @@
 package cn.wagentim.homeapps.utils;
 
+import java.util.List;
+
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 
+import cn.wagentim.homeapps.entities.CustomerEntity;
 import cn.wagentim.homeapps.entities.managers.DataManager;
 
 
@@ -64,7 +67,7 @@ public final class Validator
 		return true;
 	}
 	
-	public static boolean checkUser(final String username, final String password)
+	public static List<CustomerEntity> checkUser(final String username, final String password)
 	{
 		return DataManager.INSTANE.DB_DATA().checkUser(username, password);
 	}

@@ -1,26 +1,31 @@
 package cn.wagentim.homeapps.entities.managers;
 
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public final class CachedDataManager
 {
-    private List<String> currentAuths = new CopyOnWriteArrayList<String>();
+    private Map<String, Long> currentUsers = new ConcurrentHashMap<String, Long>(20);
     private Logger logger = Logger.getLogger(CachedDataManager.class.getSimpleName());
 
-    public void addNewAuth(final String auth)
+    public void addNewAuth(final Long userID, final String auth)
     {
-        if( !currentAuths.contains(auth) )
+        if( !currentUsers.keySet().contains(auth) )
         {
-            currentAuths.add(auth);
+        	currentUsers.put(auth, userID);
         }
+    }
+    
+    public Long getUserID(final String md5)
+    {
+    	return currentUsers.get(md5);
     }
 
 	public boolean isAuthAvailable(String md5)
 	{
-		boolean isContained = currentAuths.contains(md5);
+		boolean isContained = currentUsers.keySet().contains(md5);
 		logger.log(Level.INFO, "auth data is cached: " + isContained);
 		return isContained;
 	}

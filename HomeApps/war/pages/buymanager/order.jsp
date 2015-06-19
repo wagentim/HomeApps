@@ -35,6 +35,8 @@
 		{
 			response.sendRedirect(Constants.PAGE_LOGIN);
 		}
+		
+		Long userID = DataManager.INSTANE.CACHE_DATA().getUserID(Auth.getSession(request));
 	%>
 </head>
 
@@ -83,6 +85,9 @@
 	<script type="text/javascript">
 		window.json_customer = <%=json_customers %>;
 		window.json_product = <%=json_products %>;
+		window.userID = <%=userID %>
 	</script>
+	
+	
 </body>
 </html>
