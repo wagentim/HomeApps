@@ -1,6 +1,7 @@
 package cn.wagentim.homeapps;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -10,10 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cn.wagentim.homeapps.entities.IEntity;
+import cn.wagentim.homeapps.entities.OrderEntity;
 import cn.wagentim.homeapps.entities.managers.DataManager;
 import cn.wagentim.homeapps.entities.managers.EntityFactory;
 import cn.wagentim.homeapps.entities.managers.EntityHelper;
 import cn.wagentim.homeapps.utils.Constants;
+import cn.wagentim.homeapps.utils.JSONUtils;
 import cn.wagentim.homeapps.utils.RequestHelper;
 
 public class DataServlet extends HttpServlet
@@ -59,6 +62,25 @@ public class DataServlet extends HttpServlet
 				{
 					DataManager.INSTANE.DB_DATA().deleteEntity(EntityHelper.getEntityClazz(entityType), id);
 				}
+				break;
+				
+			case Constants.OPT_ENTITY_GET_ALL:
+				
+				List<OrderEntity> orders = DataManager.INSTANE.DB_DATA().getAllOrders(id);
+				
+				for(int i = 0; i < orders.size(); i++)
+				{
+					OrderEntity order = orders.get(i);
+					List<Long> items = order.getItems();
+					for(int j=0; j < items.size(); j++)
+					{
+						order.addOrder(DataManager.INSTANE.DB_DATA().getOrderItem(items.get(j)));
+					}
+				}
+				
+				String content = JSONUtils.toJsonString(orders);
+				System.out.println(content);
+				
 				break;
 		}
 	}

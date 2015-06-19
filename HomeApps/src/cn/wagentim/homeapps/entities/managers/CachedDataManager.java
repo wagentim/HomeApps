@@ -20,7 +20,12 @@ public final class CachedDataManager
     
     public Long getUserID(final String md5)
     {
-    	return currentUsers.get(md5);
+    	if( null != md5 && md5.length() > 0 )
+    	{
+    		return currentUsers.get(md5);
+    	}
+    	
+    	return -1L;
     }
 
 	public boolean isAuthAvailable(String md5)

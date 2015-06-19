@@ -88,8 +88,26 @@ $(document).ready(
         	order.items = items;
         	sendJsonToDataServlet(JSON.stringify(order));
         });
+        
+        loadOrders();
     }
 );
+
+function loadOrders()
+{
+	$.ajax(
+		    {
+		        url : "/data?entity=2&opt=2&uid=" + window.userID,
+		        type: "GET",
+		        success:function(data, textStatus, jqXHR)
+		        {
+		        },
+		        error: function(jqXHR, textStatus, errorThrown)
+		        {
+		        	alert("error");
+		        }
+		    });
+}
 
 function sendJsonToDataServlet(data)
 {

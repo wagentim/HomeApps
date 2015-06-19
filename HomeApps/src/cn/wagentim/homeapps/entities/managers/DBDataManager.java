@@ -12,6 +12,8 @@ import cn.wagentim.homeapps.entities.CustomerEntity;
 import cn.wagentim.homeapps.entities.IDEntity;
 import cn.wagentim.homeapps.entities.IEntity;
 import cn.wagentim.homeapps.entities.IEntityConstants;
+import cn.wagentim.homeapps.entities.OrderEntity;
+import cn.wagentim.homeapps.entities.OrderItemEntity;
 import cn.wagentim.homeapps.utils.Constants;
 import cn.wagentim.homeapps.utils.StatementHelper;
 
@@ -102,4 +104,21 @@ public class DBDataManager implements IStatement, IEntityConstants
 		return result;
 	}
 
+	public List<OrderEntity> getAllOrders(Long id)
+	{
+		List<OrderEntity> result = null;
+		Query q = em.createQuery(GET_ORDERS_BY_USER);
+		q.setParameter("user_id", id);
+		result = q.getResultList();
+		return result;
+	}
+	
+	public OrderItemEntity getOrderItem(Long id)
+	{
+		List<OrderItemEntity> result = null;
+		Query q = em.createQuery(GET_ORDER_ITEM);
+		q.setParameter("item_id", id);
+		result = q.getResultList();
+		return result.get(0);
+	}
 }
