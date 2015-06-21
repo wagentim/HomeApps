@@ -101,6 +101,15 @@ function loadOrders()
 		        type: "GET",
 		        success:function(data, textStatus, jqXHR)
 		        {
+		        	var orders = data;
+		        	if( orders != undefined)
+		        	{
+		        		for( var i = 0; i < orders.length; i++)
+		        		{
+			        		var order = orders[i];
+			        		addOrderWithData(order);
+		        		}
+		        	}
 		        },
 		        error: function(jqXHR, textStatus, errorThrown)
 		        {
@@ -139,6 +148,15 @@ function addOrder()
     $("div#order_list").append(result);
 }
 
+function addOrderWithData(order)
+{
+	var result = "<hr /><div id='order'>";
+    result += getOrderTitleWithData(id_customer, order);
+    result += getOrderTableWithData(id_product, order);
+    result += "</div>";
+    $("div#order_list").append(result);
+}
+
 function getOrderTitle(id, order_id)
 {
     var result = "";
@@ -161,12 +179,51 @@ function getOrderTitle(id, order_id)
     return result;
 }
 
+function getOrderTitleWithData(id, order)
+{
+    var result = "";
+    result += "<div id='order'>";
+    result += "<div id='order_title' class='row'>";
+    result += "<div class='col-sm-2'>";
+    result += getDropDown("选择客户 ", id);
+    result += "</div>";
+    result += "<div class='col-sm-2'>";
+    result += "<a>订单号: " + order.id + "</a>";
+    result += "</div>";
+    result += "<div class='col-sm-5'>";
+    result += "<lable />";
+    result += "</div>";
+    result += "<div class='col-sm-1'>总额: ";
+    result += "</div>";
+    result += "</div>";
+    result += "</div>";
+    result += "<br />";
+    return result;
+}
+
 function getOrderTable(id)
 {
     var result = "";
     result += "<table id='orderTable' class='table table-striped table-hover table-condensed'>";
     result += getTableHeader();
     result += getTableBody(id);
+    result += "</table>";
+    return result;
+}
+
+function getOrderTableWithData(id, order)
+{
+    var result = "";
+    result += "<table id='orderTable' class='table table-striped table-hover table-condensed'>";
+    result += getTableHeader();
+    result += "<tbody>";
+    var items = order.orders;
+    for(var i = 0; i < items.length; i++)
+    {
+    	result += addRowWithData(true, false, id, items[i]);
+    }
+    result += addRow(false, true, id);
+    result += "</tbody>";
     result += "</table>";
     return result;
 }
@@ -235,11 +292,37 @@ function addRow(show, is_button, id)
     return result;
 }
 
+function addRowWithData(show, is_button, id, item)
+{
+    var result = "";
+    result += ("<tr item_id=" + item.id + ">");
+    result += ("<td style='vertical-align: middle'>" + getDropDown("商品列表 ", id) + "</td>");
+
+    result += ("<td>" + getInputLineWithValue("sprice", "", item.singlePrice) + "</td>");
+    result += ("<td>" + getInputLineWithValue("amount", "", item.amount) + "</td>");
+    result += ("<td>" + getInputLineWithValue("tprice", "", item.totalPrice) + "</td>");
+    result += ("<td>" + getInputLineWithValue("sweight", "", item.singleWeight) + "</td>");
+    result += ("<td>" + getInputLineWithValue("tweight", "", item.totalWeight) + "</td>");
+    result += ("<td>" + getInputLineWithValue("other", "", item.others) + "</td>");
+    result += ("<td style='text-align:center;vertical-align: middle'><input type='image' src='/imgs/delete.png' class='delete_product' /></td>");
+    result += "</tr>";
+    return result;
+}
+
 function getInputLine(name, visible)
 {
     var result = "";
     result += "<div class='form-group, input'>";
     result += "<input type='text' class='form-control " + name + "' "+ visible +">";
+    result += "</div>";
+    return result;
+}
+
+function getInputLineWithValue(name, visible, value)
+{
+    var result = "";
+    result += "<div class='form-group, input'>";
+    result += "<input type='text' " + "value='" + value + "' " + "class='form-control " + name + "' "+ visible +">";
     result += "</div>";
     return result;
 }

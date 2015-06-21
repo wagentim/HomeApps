@@ -1,6 +1,7 @@
 package cn.wagentim.homeapps;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -79,8 +80,11 @@ public class DataServlet extends HttpServlet
 				}
 				
 				String content = JSONUtils.toJsonString(orders);
+				response.setContentType("application/json");
+				PrintWriter out = response.getWriter();
+				out.print(content);
+				out.flush();
 				System.out.println(content);
-				
 				break;
 		}
 	}
