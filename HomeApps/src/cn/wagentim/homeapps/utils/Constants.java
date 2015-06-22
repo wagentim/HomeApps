@@ -88,6 +88,8 @@ public interface Constants
 	public static final int OPT_ENTITY_GET_ALL = 2;
 	public static final int OPT_START_GRABBING = 3;
 	public static final int OPT_STOP_GRABBING = 4;
+	public static final int OPT_ENTITY_DELETE_ALL = 5;
+	public static final int OPT_ENTITY_SAVE_OR_UPDATE_ORDER = 6;
 	
 	
 	//  --------------- Operation Name ---------------

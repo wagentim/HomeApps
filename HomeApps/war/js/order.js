@@ -16,6 +16,14 @@ $(document).ready(
                 addOrder();
             }
         );
+        
+        $("button#remove_all_order").click(
+
+                function ()
+                {
+                    removeAllOrders();
+                }
+            );
 
         $("#order_list").on("click", "button#btn_product",
             function()
@@ -63,7 +71,15 @@ $(document).ready(
         $("#order_list").on("click", "#btn_save", function(){
         	var table = $(this).closest("table");
         	var order = new Object();
-        	order.id = 0;
+        	var order_id = table.attr("order_id");
+        	if( order_id == undefined)
+        	{
+        		order.id = 0;
+        	}
+        	else
+        	{
+        		order.id = order_id;
+        	}
         	order.customer = window.userID;
         	var items = [];
         	table.find('tbody > tr').each(function(i){
@@ -92,6 +108,24 @@ $(document).ready(
         loadOrders();
     }
 );
+
+function removeAllOrders()
+{
+	$.ajax(
+		    {
+		        url : "/data?entity=2&opt=5&uid=" + window.userID,
+		        type: "GET",
+		        success:function(data, textStatus, jqXHR)
+		        {
+		        	alert("success");
+		        	location.reload();
+		        },
+		        error: function(jqXHR, textStatus, errorThrown)
+		        {
+		        	alert("error");
+		        }
+		    });
+}
 
 function loadOrders()
 {
@@ -129,7 +163,7 @@ function sendJsonToDataServlet(data)
 			        data : {content:data},
 			        success:function(data, textStatus, jqXHR)
 			        {
-//			        	location.reload();
+			        	location.reload();
 			        },
 			        error: function(jqXHR, textStatus, errorThrown)
 			        {
@@ -188,7 +222,7 @@ function getOrderTitleWithData(id, order)
     result += getDropDown("选择客户 ", id);
     result += "</div>";
     result += "<div class='col-sm-2'>";
-    result += "<a>订单号: " + order.id + "</a>";
+    result += "<a class='order_id'>订单号: " + order.id + "</a>";
     result += "</div>";
     result += "<div class='col-sm-5'>";
     result += "<lable />";
@@ -214,7 +248,7 @@ function getOrderTable(id)
 function getOrderTableWithData(id, order)
 {
     var result = "";
-    result += "<table id='orderTable' class='table table-striped table-hover table-condensed'>";
+    result += "<table id='orderTable' class='table table-striped table-hover table-condensed' order_id='" + order.id + "'>";
     result += getTableHeader();
     result += "<tbody>";
     var items = order.orders;
@@ -296,8 +330,7 @@ function addRowWithData(show, is_button, id, item)
 {
     var result = "";
     result += ("<tr item_id=" + item.id + ">");
-    result += ("<td style='vertical-align: middle'>" + getDropDown("商品列表 ", id) + "</td>");
-
+    result += ("<td style='vertical-align: middle'>" + getDropDownWithData("商品列表 ", id, item) + "</td>");
     result += ("<td>" + getInputLineWithValue("sprice", "", item.singlePrice) + "</td>");
     result += ("<td>" + getInputLineWithValue("amount", "", item.amount) + "</td>");
     result += ("<td>" + getInputLineWithValue("tprice", "", item.totalPrice) + "</td>");
@@ -327,7 +360,8 @@ function getInputLineWithValue(name, visible, value)
     return result;
 }
 
-function getDropDown(name, id) {
+function getDropDown(name, id) 
+{
     var result = "<div id='" + id + "' class='dropdown'><button class='btn btn-default dropdown-toggle' type='button' id='menu1' data-toggle='dropdown'>" + name + "<span class='caret' uid=0 ></span></button>";
     result += "<ul class='dropdown-menu' role='menu' aria-labelledby='menu1'>";
     if( id == id_customer)
@@ -358,6 +392,52 @@ function getDropDown(name, id) {
     		result += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#'>" + status[i] + "</a></li>");
     	}
     }
+    result += "</ul></div>";
+    return result;
+}
+
+function getDropDownWithData(name, id, item)
+{
+	var temp = "";
+	var current_id;
+	var current_name;
+    if( id == id_customer)
+    {
+    	for(var i = 0; i < window.json_customer.length; i++)
+    	{
+    		var firstName = window.json_customer[i].firstName;
+    		var lastName = window.json_customer[i].lastName;
+    		var uid = window.json_customer[i].id;
+    		temp += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#' uid='" + uid + "'>" + lastName + " " + firstName + " " + "</a></li>");
+    	}
+    }
+    else if( id == id_product )
+    {
+    	for(var i = 0; i < window.json_product.length; i++)
+    	{
+    		var uid = window.json_product[i].id;
+    		var item_name = window.json_product[i].name;
+    		if( item.product == uid)
+    		{
+    			current_id = uid;
+    			current_name = item_name
+    		}
+    		temp += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#' uid='" + uid + "'>" + item_name + " " + "</a></li>");
+    	}
+    }
+    else if( id == id_status )
+    {
+    	var status = getStatusList();
+    	
+    	for( var i = 0; i < status.length; i++)
+    	{
+    		temp += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#'>" + status[i] + "</a></li>");
+    	}
+    }
+    
+    var result = "<div id='" + current_id + "' class='dropdown'><button class='btn btn-default dropdown-toggle' type='button' id='menu1' data-toggle='dropdown'>" + current_name + " <span class='caret' uid=0 ></span></button>";
+    result += "<ul class='dropdown-menu' role='menu' aria-labelledby='menu1'>";
+    result += temp;
     result += "</ul></div>";
     return result;
 }

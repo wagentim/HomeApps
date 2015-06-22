@@ -1,0 +1,8 @@
+------------------
+22.06.2015
+
+bugs:
+1. cannot add the third item in one order. It will automatically add to another new order
+2. fix the deletion on product and customer editing page
+
+------------------

@@ -80,6 +80,8 @@
 	<div id="command_list" class="container">
 		<button id="add_order" type="button" class="btn btn-warning"
 			role="button">添加订单</button>
+		<button id="remove_all_order" type="button" class="btn btn-warning"
+			role="button">Remove Orders</button>
 	</div>
 	<div id='order_list' class='container'></div>
 	<script type="text/javascript">

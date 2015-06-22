@@ -60,6 +60,7 @@ public class DBDataManager implements IStatement, IEntityConstants
 
 	public synchronized void deleteEntity(Class<?> entityType, Long uid)
 	{
+		
 		Object c = em.find(entityType, uid);
 
 		if( null == c )
@@ -75,6 +76,7 @@ public class DBDataManager implements IStatement, IEntityConstants
 	@SuppressWarnings("unchecked")
 	public synchronized IDEntity getIDEntity(int type)
 	{
+		em.clear();
 		List<IDEntity> result = null;
 		Query q = em.createQuery(GET_ID_ENTITY_BY_TYPE);
 		q.setParameter("type", type);
@@ -95,6 +97,7 @@ public class DBDataManager implements IStatement, IEntityConstants
 
 	public synchronized List<CustomerEntity> checkUser(String username, String password)
 	{
+		em.clear();
 		List<CustomerEntity> result = null;
 		Query q = em.createQuery(GET_USER_BY_USERNAME_AND_PASSWORD);
 		q.setParameter("username", username);
@@ -106,6 +109,7 @@ public class DBDataManager implements IStatement, IEntityConstants
 
 	public List<OrderEntity> getAllOrders(Long id)
 	{
+		em.clear();
 		List<OrderEntity> result = null;
 		Query q = em.createQuery(GET_ORDERS_BY_USER);
 		q.setParameter("user_id", id);
@@ -115,10 +119,21 @@ public class DBDataManager implements IStatement, IEntityConstants
 	
 	public OrderItemEntity getOrderItem(Long id)
 	{
+		em.clear();
 		List<OrderItemEntity> result = null;
 		Query q = em.createQuery(GET_ORDER_ITEM);
 		q.setParameter("item_id", id);
 		result = q.getResultList();
 		return result.get(0);
+	}
+
+	public boolean deleteAllOrders(Long id)
+	{
+		em.clear();
+		List<OrderItemEntity> result = null;
+		Query q = em.createQuery(DELETE_ALL_ORDERS);
+		q.setParameter("user_id", id);
+		q.executeUpdate();
+		return true;
 	}
 }

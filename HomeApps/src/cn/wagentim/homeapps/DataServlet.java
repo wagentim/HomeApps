@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cn.wagentim.homeapps.entities.IEntity;
 import cn.wagentim.homeapps.entities.OrderEntity;
+import cn.wagentim.homeapps.entities.OrderItemEntity;
 import cn.wagentim.homeapps.entities.managers.DataManager;
 import cn.wagentim.homeapps.entities.managers.EntityFactory;
 import cn.wagentim.homeapps.entities.managers.EntityHelper;
@@ -38,10 +39,15 @@ public class DataServlet extends HttpServlet
 		int entityType = RequestHelper.getEntityType(request);
 		int opt = RequestHelper.getOperation(request);
 		Long id = RequestHelper.getID(request);
+		PrintWriter out = response.getWriter();
 		logger.log(Level.INFO, "DataServlet#doPost Entity Type: " + entityType + "; operation: " + opt + "; Entity ID: " + id);
 
 		switch(opt)
 		{
+			case Constants.OPT_ENTITY_SAVE_OR_UPDATE_ORDER:
+				
+				break;
+		
 			case Constants.OPT_ENTITY_SAVE_OR_UPDATE:
 				IEntity entity = EntityFactory.createEntity(entityType, request);
 				DataManager.INSTANE.DB_DATA().addOrModifyData(entity, id);
@@ -58,6 +64,7 @@ public class DataServlet extends HttpServlet
 				        break;
 				}
 				break;
+
 			case Constants.OPT_ENTITY_DELETE:
 				if( 0 != id )
 				{
@@ -75,16 +82,23 @@ public class DataServlet extends HttpServlet
 					List<Long> items = order.getItems();
 					for(int j=0; j < items.size(); j++)
 					{
-						order.addOrder(DataManager.INSTANE.DB_DATA().getOrderItem(items.get(j)));
+						OrderItemEntity item = DataManager.INSTANE.DB_DATA().getOrderItem(items.get(j)); 
+						
+						order.addOrder(item);
 					}
 				}
 				
 				String content = JSONUtils.toJsonString(orders);
 				response.setContentType("application/json");
-				PrintWriter out = response.getWriter();
+				System.out.println(content);
 				out.print(content);
 				out.flush();
-				System.out.println(content);
+				break;
+				
+			case Constants.OPT_ENTITY_DELETE_ALL:
+				boolean success = DataManager.INSTANE.DB_DATA().deleteAllOrders(id);
+				out.print(success);
+				out.flush();
 				break;
 		}
 	}
