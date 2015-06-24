@@ -56,7 +56,7 @@ function deleteCustomer()
 {
     $.ajax(
     {
-        url : "/data?entity=0&opt=1",
+        url : "/data?entity=0&opt=1&uid=" + selID,
         type: "POST",
         data : {id: selID},
         success:function(data, textStatus, jqXHR)

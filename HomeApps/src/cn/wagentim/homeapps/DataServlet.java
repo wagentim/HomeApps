@@ -44,10 +44,6 @@ public class DataServlet extends HttpServlet
 
 		switch(opt)
 		{
-			case Constants.OPT_ENTITY_SAVE_OR_UPDATE_ORDER:
-				
-				break;
-		
 			case Constants.OPT_ENTITY_SAVE_OR_UPDATE:
 				IEntity entity = EntityFactory.createEntity(entityType, request);
 				DataManager.INSTANE.DB_DATA().addOrModifyData(entity, id);
@@ -65,10 +61,16 @@ public class DataServlet extends HttpServlet
 				}
 				break;
 
-			case Constants.OPT_ENTITY_DELETE:
+			case Constants.OPT_DELETE:
 				if( 0 != id )
 				{
 					DataManager.INSTANE.DB_DATA().deleteEntity(EntityHelper.getEntityClazz(entityType), id);
+					out.print("true");
+					out.flush();
+				}
+				else
+				{
+					logger.log(Level.INFO, "DataServlet#doPost the id is null");
 				}
 				break;
 				
@@ -92,12 +94,6 @@ public class DataServlet extends HttpServlet
 				response.setContentType("application/json");
 				System.out.println(content);
 				out.print(content);
-				out.flush();
-				break;
-				
-			case Constants.OPT_ENTITY_DELETE_ALL:
-				boolean success = DataManager.INSTANE.DB_DATA().deleteAllOrders(id);
-				out.print(success);
 				out.flush();
 				break;
 		}

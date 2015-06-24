@@ -10,7 +10,7 @@ public class AppUtils
 			{
 				case Constants.OPT_ENTITY_SAVE_OR_UPDATE:
 					return Constants.OPT_NAME_ENTITY_SAVE_OR_UPDATE;
-				case Constants.OPT_ENTITY_DELETE:
+				case Constants.OPT_DELETE:
 					return Constants.OPT_NAME_ENTITY_DELETE;
 				case Constants.OPT_ENTITY_GET_ALL:
 					return Constants.OPT_NAME_ENTITY_GET_ALL;

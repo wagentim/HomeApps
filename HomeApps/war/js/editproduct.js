@@ -50,7 +50,7 @@ function deleteProduct()
 {
     $.ajax(
     {
-        url : "/data?entity=1&opt=1",
+        url : "/data?entity=1&opt=1&uid="+selID,
         type: "POST",
         data : {id: selID},
         success:function(data, textStatus, jqXHR)

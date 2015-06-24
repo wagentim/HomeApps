@@ -22,6 +22,7 @@ public final class OrderEntity implements IEntityConstants, Serializable, IEntit
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private Long customer;
+	private Long owner;
 	private List<Long> items;
 	@Transient
 	private List<OrderItemEntity> orders;
@@ -83,6 +84,14 @@ public final class OrderEntity implements IEntityConstants, Serializable, IEntit
 		{
 			orders.add(order);
 		}
+	}
+	public Long getOwner()
+	{
+		return owner;
+	}
+	public void setOwner(Long owner)
+	{
+		this.owner = owner;
 	}
 
 }
