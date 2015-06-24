@@ -435,7 +435,7 @@ function getDropDownWithData(name, id, item)
     	}
     }
     
-    var result = "<div id='" + current_id + "' class='dropdown'><button class='btn btn-default dropdown-toggle' type='button' id='menu1' data-toggle='dropdown'>" + current_name + " <span class='caret' uid=0 ></span></button>";
+    var result = "<div id='" + current_id + "' class='dropdown'><button class='btn btn-default dropdown-toggle' type='button' id='menu1' data-toggle='dropdown'>" + current_name + " <span class='caret' uid=" + item.id + "></span></button>";
     result += "<ul class='dropdown-menu' role='menu' aria-labelledby='menu1'>";
     result += temp;
     result += "</ul></div>";

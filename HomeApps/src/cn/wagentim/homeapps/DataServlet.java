@@ -62,6 +62,7 @@ public class DataServlet extends HttpServlet
 				break;
 
 			case Constants.OPT_DELETE:
+				
 				if( 0 != id )
 				{
 					DataManager.INSTANE.DB_DATA().deleteEntity(EntityHelper.getEntityClazz(entityType), id);
@@ -74,6 +75,12 @@ public class DataServlet extends HttpServlet
 				}
 				break;
 				
+			case Constants.OPT_ENTITY_DELETE_ALL:
+				boolean success = DataManager.INSTANE.DB_DATA().deleteAllOrders(id);
+				out.print(success);
+				out.flush();
+				break;
+				
 			case Constants.OPT_ENTITY_GET_ALL:
 				
 				List<OrderEntity> orders = DataManager.INSTANE.DB_DATA().getAllOrders(id);
@@ -82,11 +89,15 @@ public class DataServlet extends HttpServlet
 				{
 					OrderEntity order = orders.get(i);
 					List<Long> items = order.getItems();
-					for(int j=0; j < items.size(); j++)
+					
+					if( null != items && !items.isEmpty() )
 					{
-						OrderItemEntity item = DataManager.INSTANE.DB_DATA().getOrderItem(items.get(j)); 
-						
-						order.addOrder(item);
+						for(int j=0; j < items.size(); j++)
+						{
+							OrderItemEntity item = DataManager.INSTANE.DB_DATA().getOrderItem(items.get(j)); 
+							
+							order.addOrder(item);
+						}
 					}
 				}
 				
