@@ -50,8 +50,8 @@ public final class EntityFactory
             {
                 order.setId(orderID);
             }
-            Long customer = orders.getLong(Constants.ORDER_CUSTOMER);
-            order.setCustomer(customer);
+            Long owner = orders.getLong(Constants.ORDER_OWNER);
+            order.setOwner(owner);
             
             JSONArray products = orders.getJSONArray(Constants.ORDER_ITEMS);
             
@@ -77,6 +77,7 @@ public final class EntityFactory
                     item.setTotalWeight(product.getDouble(Constants.ORDER_TOTAL_WEIGHT));
                     item.setOthers(product.getString(Constants.ORDER_OTHER));
                     order.addOrderItem(DataManager.INSTANE.DB_DATA().addOrModifyData(item, item.getId()));
+                    order.addOrder(item);
                 }
             }
         }

@@ -80,7 +80,7 @@ $(document).ready(
         	{
         		order.id = order_id;
         	}
-        	order.customer = window.userID;
+        	order.owner = window.userID;
         	var items = [];
         	table.find('tbody > tr').each(function(i){
         		var productID = $(this).find("span").attr("uid");
@@ -99,10 +99,18 @@ $(document).ready(
         			item.other = $tds.eq(6).find("input").val();
         			items.push(item);
         		}
+        		else
+        		{
+        			var $tds = $(this).find('td');
+        			var status = $tds.eq(5).find("span").attr("uid");
+        			if( typeof(status) != undefined )
+        			{
+        				order.status = status;
+        			}
+        		}
         	});
-
         	order.items = items;
-        	sendJsonToDataServlet(JSON.stringify(order));
+        	sendJsonToDataServlet(order);
         });
         
         loadOrders();
@@ -156,11 +164,13 @@ function sendJsonToDataServlet(data)
 {
 	if(data != "undefined")
 	{
+		var stringData = JSON.stringify(data);
+		
 		$.ajax(
 			    {
-			        url : "/data?entity=2&opt=0",
+			        url : "/data?entity=2&opt=0&uid=" + data.id,
 			        type: "POST",
-			        data : {content:data},
+			        data : {content:stringData},
 			        success:function(data, textStatus, jqXHR)
 			        {
 			        	location.reload();
@@ -399,7 +409,7 @@ function getDropDown(name, id)
 function getDropDownWithData(name, id, item)
 {
 	var temp = "";
-	var current_id;
+	var current_id = item.product;
 	var current_name;
     if( id == id_customer)
     {
@@ -417,9 +427,8 @@ function getDropDownWithData(name, id, item)
     	{
     		var uid = window.json_product[i].id;
     		var item_name = window.json_product[i].name;
-    		if( item.product == uid)
+    		if( current_id == uid)
     		{
-    			current_id = uid;
     			current_name = item_name
     		}
     		temp += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#' uid='" + uid + "'>" + item_name + " " + "</a></li>");
@@ -431,11 +440,11 @@ function getDropDownWithData(name, id, item)
     	
     	for( var i = 0; i < status.length; i++)
     	{
-    		temp += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#'>" + status[i] + "</a></li>");
+    		temp += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#' uid='"+  + status[i].id +">" + status[i].name + "</a></li>");
     	}
     }
     
-    var result = "<div id='" + current_id + "' class='dropdown'><button class='btn btn-default dropdown-toggle' type='button' id='menu1' data-toggle='dropdown'>" + current_name + " <span class='caret' uid=" + item.id + "></span></button>";
+    var result = "<div id='" + current_id + "' class='dropdown'><button class='btn btn-default dropdown-toggle' type='button' id='menu1' data-toggle='dropdown'>" + current_name + " <span class='caret' uid=" + current_id + "></span></button>";
     result += "<ul class='dropdown-menu' role='menu' aria-labelledby='menu1'>";
     result += temp;
     result += "</ul></div>";
@@ -456,7 +465,7 @@ function find_product(id)
 
 function getStatusList()
 {
-	var status = ["订单状态", "确认订单", "购买商品", "准备发货", "货物已发", "确认收款", "订单结束"];
+	var status = [{"name":"订单状态", "id":0}, {"name":"确认订单", "id":1}, {"name":"购买商品", "id":2}, {"name":"准备发货", "id":3}, {"name":"货物已发", "id":4}, {"name":"确认收款", "id":5}, {"name":"订单结束", "id":5}]
 	
 	return status;
 }

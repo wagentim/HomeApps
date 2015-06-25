@@ -40,7 +40,7 @@ public class DataServlet extends HttpServlet
 		int opt = RequestHelper.getOperation(request);
 		Long id = RequestHelper.getID(request);
 		PrintWriter out = response.getWriter();
-		logger.log(Level.INFO, "DataServlet#doPost Entity Type: " + entityType + "; operation: " + opt + "; Entity ID: " + id);
+		logger.log(Level.INFO, "DataServlet#doPost Entity Type: " + entityType + "; operation: " + opt + "; ID: " + id);
 
 		switch(opt)
 		{

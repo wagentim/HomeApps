@@ -49,6 +49,7 @@ public interface Constants
 	//  --------------- Order Constants ---------------
 	public static final String ORDER_CONTENT = "content";
 	public static final String ORDER_CUSTOMER = "customer";
+	public static final String ORDER_OWNER = "owner";
 	public static final String ORDER_ITEMS = "items";
 	public static final String ORDER_PRODUCT = "product";
 	public static final String ORDER_AMOUNT = "amount";

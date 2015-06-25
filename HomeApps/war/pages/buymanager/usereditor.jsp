@@ -30,7 +30,7 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 		<script src="/js/jquery.cookie.js"></script>
 		<script src="/js/edituser.js"></script>
-	<title>编辑客户</title>
+	<title>ç¼–è¾‘å®¢æˆ·</title>
 	<%
 		if( !Auth.isSessionAvailable(request) )
 		{
@@ -56,15 +56,15 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="order.jsp">管理订单 <span class="sr-only">(current)</span></a></li>
-					<li class="active"><a href="#">编辑客户<span class="sr-only">(current)</span></a></li>
-					<li><a href="producteditor.jsp">编辑商品<span class="sr-only">(current)</span></a></li>
+					<li><a href="order.jsp">Order<span class="sr-only">(current)</span></a></li>
+					<li class="active"><a href="#">User Editor<span class="sr-only">(current)</span></a></li>
+					<li><a href="producteditor.jsp">Product Editor<span class="sr-only">(current)</span></a></li>
 				</ul>
 				<form class="navbar-form navbar-right" role="search">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="搜索客户名字">
+						<input type="text" class="form-control" placeholder="Search User">
 					</div>
-					<button type="submit" class="btn btn-default">搜索</button>
+					<button type="submit" class="btn btn-default">Search</button>
 				</form>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -73,7 +73,7 @@
 	</nav>
 	<div class="container main">
 		<div class="list-group col-xs-offset-1 col-xs-2">
-			<a href='#' class='list-group-item active new' style='text-align: center'>+ 新建客户</a>
+			<a href='#' class='list-group-item active new' style='text-align: center'>+ Add New Customer</a>
 		<%
 		    String json_customers = JSONUtils.toJsonString(DataManager.INSTANE.DB_DATA().getAllEntity(CustomerEntity.class));
 
@@ -106,7 +106,7 @@
 				<div class='form-group'>
 					<div class="col-sm-2">
 						<label for='uid' class='control-label'
-							style='vertical-align: middle'>用户ID: </label>
+							style='vertical-align: middle'>User ID: </label>
 					</div>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="uid" name="uid"
@@ -116,49 +116,49 @@
 				<div class='form-group'>
 					<div class="col-sm-2">
 						<label for='lastname' class='control-label'
-							style='vertical-align: middle'>客户姓: </label>
+							style='vertical-align: middle'>Last Name: </label>
 					</div>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="lastname"
-							name="lastname" placeholder="客户姓" value="">
+							name="lastname" placeholder="Last Name" value="">
 					</div>
 					<div class="col-sm-2">
 						<label for='firstname' class='control-label'
-							style='vertical-align: middle'>客户名: </label>
+							style='vertical-align: middle'>First Name: </label>
 					</div>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="firstname"
-							name="firstname" placeholder="客户名" value="">
+							name="firstname" placeholder="First Name" value="">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-2">
 						<label for='alias' class='control-label'
-							style='vertical-align: middle'>登录名称: </label>
+							style='vertical-align: middle'>Alias: </label>
 					</div>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="alias" name="alias"
-							placeholder="登录名称" value="">
+							placeholder="Alias" value="">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-2">
 						<label for='pwd' class='control-label'
-							style='vertical-align: middle'>登录密码: </label>
+							style='vertical-align: middle'>Password: </label>
 					</div>
 					<div class="col-sm-10">
 						<input type="password" class="form-control" id="pwd" name="pwd"
-							placeholder="登录密码" value="" readonly>
+							placeholder="Password" value="">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-2">
 						<label for='telephon' class='control-label'
-							style='vertical-align: middle'>电话号码: </label>
+							style='vertical-align: middle'>Telefon: </label>
 					</div>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="telephon"
-							name="telephon" placeholder="电话号码" value="">
+							name="telephon" placeholder="Telefon" value="">
 					</div>
 				</div>
 				<div class="form-group">
@@ -174,56 +174,56 @@
 				<div class="form-group">
 					<div class="col-sm-2">
 						<label for='country' class='control-label'
-							style='vertical-align: middle'>国家: </label>
+							style='vertical-align: middle'>Country: </label>
 					</div>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="country"
-							name="country" placeholder="国家" value="">
+							name="country" placeholder="Country" value="">
 					</div>
 					<div class="col-sm-2">
 						<label for='province' class='control-label'
-							style='vertical-align: middle'>省份: </label>
+							style='vertical-align: middle'>Province: </label>
 					</div>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="province"
-							name="province" placeholder="省份" value="">
+							name="province" placeholder="Province" value="">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-2">
 						<label for='city' class='control-label'
-							style='vertical-align: middle'>城市: </label>
+							style='vertical-align: middle'>City: </label>
 					</div>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="city" name="city"
-							placeholder="城市" value="">
+							placeholder="City" value="">
 					</div>
 					<div class="col-sm-2">
 						<label for='zipcode' class='control-label'
-							style='vertical-align: middle'>邮编: </label>
+							style='vertical-align: middle'>Zipcode: </label>
 					</div>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="zipcode"
-							name="zipcode" placeholder="邮编" value="">
+							name="zipcode" placeholder="Zipcode" value="">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-2">
 						<label for='address' class='control-label'
-							style='vertical-align: middle'>详细地址: </label>
+							style='vertical-align: middle'>Address: </label>
 					</div>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="address"
-							name="address" placeholder="详细地址" value="">
+							name="address" placeholder="Address" value="">
 					</div>
 				</div>
 				<br>
 				<div class="form-group">
 					<div class="col-sm-2">
-						<button type="button" class="btn btn-danger delete">删除</button>
+						<button type="button" class="btn btn-danger delete">Delete</button>
 					</div>
 					<div class="col-sm-offset-8 col-sm-2 save">
-						<button type=submit class="btn btn-success save">保存</button>
+						<button type=submit class="btn btn-success save">Save</button>
 					</div>
 				</div>
 			</form>
