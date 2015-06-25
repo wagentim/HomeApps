@@ -85,7 +85,7 @@ $(document).ready(
         	table.find('tbody > tr').each(function(i){
         		var productID = $(this).find("span").attr("uid");
         		var item_id = $(this).attr("item_id");
-        		if (typeof( productID ) != "undefined" && productID != 0)
+        		if ((item_id != undefined))
         		{
         			var $tds = $(this).find('td');
         			var item = new Object();
@@ -101,12 +101,7 @@ $(document).ready(
         		}
         		else
         		{
-        			var $tds = $(this).find('td');
-        			var status = $tds.eq(5).find("span").attr("uid");
-        			if( typeof(status) != undefined )
-        			{
-        				order.status = status;
-        			}
+        			order.status = productID;
         		}
         	});
         	order.items = items;
@@ -266,7 +261,7 @@ function getOrderTableWithData(id, order)
     {
     	result += addRowWithData(true, false, id, items[i]);
     }
-    result += addRow(false, true, id);
+    result += addRowWithStatus(false, true, id, order.status);
     result += "</tbody>";
     result += "</table>";
     return result;
@@ -352,6 +347,22 @@ function addRowWithData(show, is_button, id, item)
     return result;
 }
 
+function addRowWithStatus(show, is_button, id, status)
+{
+    var result = "";
+    result += ("<tr>");
+    result += ("<td style='vertical-align: middle'>" +  getPrimaryButton("添加商品") + "</td>");
+    result += ("<td><label></label></td>");
+    result += ("<td><label></label></td>");
+    result += ("<td><label></label></td>");
+    result += ("<td><label></label></td>");
+    result += ("<td><label></label></td>");
+    result += ("<td style='text-align:right'>"+ getDropDownWithStatus("订单状态", id, status) +"</td>");
+    result += ("<td style='text-align:right'>" + getSuccessButton("保存订单") + "</td>");
+    result += "</tr>";
+    return result;
+}
+
 function getInputLine(name, visible)
 {
     var result = "";
@@ -399,9 +410,35 @@ function getDropDown(name, id)
     	
     	for( var i = 0; i < status.length; i++)
     	{
-    		result += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#'>" + status[i] + "</a></li>");
+    		result += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#' uid='"+status[i].id+"'>" + status[i].name + "</a></li>");
     	}
     }
+    result += "</ul></div>";
+    return result;
+}
+
+function getDropDownWithStatus(name, id, statusValue)
+{
+	var temp = "";
+	var status = getStatusList();
+	var current_id;
+	var current_name;
+	for( var i = 0; i < status.length; i++)
+	{
+		if( status[i].id != statusValue )
+		{
+			temp += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#' uid='"+ status[i].id +">" + status[i].name + "</a></li>");
+		}
+		else
+		{
+			current_id = status[i].id;
+			current_name = status[i].name;
+		}
+	}
+	
+	var result = "<div id='" + id + "' class='dropdown'><button class='btn btn-default dropdown-toggle' type='button' id='menu1' data-toggle='dropdown'>" + current_name + " <span class='caret' uid=" + current_id + "></span></button>";
+    result += "<ul class='dropdown-menu' role='menu' aria-labelledby='menu1'>";
+    result += temp;
     result += "</ul></div>";
     return result;
 }
@@ -440,11 +477,11 @@ function getDropDownWithData(name, id, item)
     	
     	for( var i = 0; i < status.length; i++)
     	{
-    		temp += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#' uid='"+  + status[i].id +">" + status[i].name + "</a></li>");
+    		temp += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#' uid='"+ status[i].id +">" + status[i].name + "</a></li>");
     	}
     }
     
-    var result = "<div id='" + current_id + "' class='dropdown'><button class='btn btn-default dropdown-toggle' type='button' id='menu1' data-toggle='dropdown'>" + current_name + " <span class='caret' uid=" + current_id + "></span></button>";
+    var result = "<div id='" + id + "' class='dropdown'><button class='btn btn-default dropdown-toggle' type='button' id='menu1' data-toggle='dropdown'>" + current_name + " <span class='caret' uid=" + current_id + "></span></button>";
     result += "<ul class='dropdown-menu' role='menu' aria-labelledby='menu1'>";
     result += temp;
     result += "</ul></div>";
@@ -465,7 +502,7 @@ function find_product(id)
 
 function getStatusList()
 {
-	var status = [{"name":"订单状态", "id":0}, {"name":"确认订单", "id":1}, {"name":"购买商品", "id":2}, {"name":"准备发货", "id":3}, {"name":"货物已发", "id":4}, {"name":"确认收款", "id":5}, {"name":"订单结束", "id":5}]
+	var status = [{"name":"确认订单", "id":1}, {"name":"购买商品", "id":2}, {"name":"准备发货", "id":3}, {"name":"货物已发", "id":4}, {"name":"确认收款", "id":5}, {"name":"订单结束", "id":5}]
 	
 	return status;
 }
