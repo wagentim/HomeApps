@@ -60,6 +60,7 @@ public interface Constants
 	public static final String ORDER_SINGLE_WEIGHT = "sweight";
 	public static final String ORDER_TOTAL_WEIGHT = "tweight";
 	public static final String ORDER_OTHER = "other";
+	public static final String ORDER_STATUS = "status";
 
 	// 	--------------- Entity Constants ---------------
 	public static final String PERSISTENCE_UNIT_NAME = "google";

@@ -53,6 +53,10 @@ public final class EntityFactory
             Long owner = orders.getLong(Constants.ORDER_OWNER);
             order.setOwner(owner);
             
+            order.setStatus(orders.getInt(Constants.ORDER_STATUS));
+            
+            order.setCustomer(orders.getLong(Constants.ORDER_CUSTOMER));
+            
             JSONArray products = orders.getJSONArray(Constants.ORDER_ITEMS);
             
             for(int i = 0; i < products.length(); i++)

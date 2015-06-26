@@ -9,6 +9,7 @@ $(document).ready(
 
     function () {
 
+    	// add an empty new order
         $("button#add_order").click(
 
             function ()
@@ -17,6 +18,8 @@ $(document).ready(
             }
         );
         
+        // remove all orders
+        // TODO remove/disable this function when all function done
         $("button#remove_all_order").click(
 
                 function ()
@@ -25,10 +28,12 @@ $(document).ready(
                 }
             );
 
+        // select production
         $("#order_list").on("click", "button#btn_product",
             function()
             {
-                var row = addRowPair(id_product);
+        		var status = $(this).parentsUntil("tr").parent().find("span").attr("uid");
+                var row = addRowPair(id_product, status);
                 $(this).closest("tbody").append(row);
                 $(this).closest("tr").remove();
             }
@@ -81,6 +86,10 @@ $(document).ready(
         		order.id = order_id;
         	}
         	order.owner = window.userID;
+        	// try to get the value from orde title
+        	var customer_id = $(this).parentsUntil("div#order").parent().find("div#order_title").find("span").attr("uid");
+        	order.customer = customer_id;
+        	// get the values of all order items from order table
         	var items = [];
         	table.find('tbody > tr').each(function(i){
         		var productID = $(this).find("span").attr("uid");
@@ -199,7 +208,6 @@ function addOrderWithData(order)
 function getOrderTitle(id, order_id)
 {
     var result = "";
-    result += "<div id='order'>";
     result += "<div id='order_title' class='row'>";
     result += "<div class='col-sm-2'>";
     result += getDropDown("选择客户 ", id);
@@ -213,7 +221,6 @@ function getOrderTitle(id, order_id)
     result += "<div class='col-sm-1'>总额: ";
     result += "</div>";
     result += "</div>";
-    result += "</div>";
     result += "<br />";
     return result;
 }
@@ -221,10 +228,9 @@ function getOrderTitle(id, order_id)
 function getOrderTitleWithData(id, order)
 {
     var result = "";
-    result += "<div id='order'>";
     result += "<div id='order_title' class='row'>";
     result += "<div class='col-sm-2'>";
-    result += getDropDown("选择客户 ", id);
+    result += getDropDownWithCustomer("选择客户 ", id, order.customer);
     result += "</div>";
     result += "<div class='col-sm-2'>";
     result += "<a class='order_id'>订单号: " + order.id + "</a>";
@@ -233,7 +239,6 @@ function getOrderTitleWithData(id, order)
     result += "<lable />";
     result += "</div>";
     result += "<div class='col-sm-1'>总额: ";
-    result += "</div>";
     result += "</div>";
     result += "</div>";
     result += "<br />";
@@ -280,16 +285,23 @@ function getTableBody(id)
 {
     var result = "";
     result += "<tbody>";
-    result += addRowPair(id);
+    result += addRowPair(id, 0);
     result += "</tbody>";
     return result;
 }
 
-function addRowPair(id)
+function addRowPair(id, status)
 {
     var result = "";
     result += addRow(true, false, id);
-    result += addRow(false, true, id);
+    if( 0 == status )
+    {
+    	result += addRow(false, true, id);
+    }
+    else
+    {
+    	result += addRowWithStatus(false, true, id, status);
+    }
     return result;
 }
 
@@ -425,17 +437,34 @@ function getDropDownWithStatus(name, id, statusValue)
 	var current_name;
 	for( var i = 0; i < status.length; i++)
 	{
-		if( status[i].id != statusValue )
-		{
-			temp += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#' uid='"+ status[i].id +">" + status[i].name + "</a></li>");
-		}
-		else
+		if( status[i].id == statusValue )
 		{
 			current_id = status[i].id;
 			current_name = status[i].name;
 		}
+		temp += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#' uid="+ status[i].id +">" + status[i].name + "</a></li>");
 	}
-	
+	var result = "<div id='" + id + "' class='dropdown'><button class='btn btn-default dropdown-toggle' type='button' id='menu1' data-toggle='dropdown'>" + current_name + " <span class='caret' uid=" + current_id + "></span></button>";
+    result += "<ul class='dropdown-menu' role='menu' aria-labelledby='menu1'>";
+    result += temp;
+    result += "</ul></div>";
+    return result;
+}
+
+function getDropDownWithCustomer(name, id, customer_id)
+{
+	var temp = "";
+	var current_id;
+	var current_name;
+	for(var i = 0; i < window.json_customer.length; i++)
+	{
+		if( window.json_customer[i].id == customer_id )
+		{
+			current_id = customer_id;
+			current_name = window.json_customer[i].lastName + " " + window.json_customer[i].firstName;
+		}
+		temp += ("<li role='presentation'><a role='menuitem' tabindex='-1' href='#' uid='" + window.json_customer[i].id + "'>" + window.json_customer[i].lastName + " " + window.json_customer[i].firstName + " " + "</a></li>");
+	}
 	var result = "<div id='" + id + "' class='dropdown'><button class='btn btn-default dropdown-toggle' type='button' id='menu1' data-toggle='dropdown'>" + current_name + " <span class='caret' uid=" + current_id + "></span></button>";
     result += "<ul class='dropdown-menu' role='menu' aria-labelledby='menu1'>";
     result += temp;
@@ -502,7 +531,7 @@ function find_product(id)
 
 function getStatusList()
 {
-	var status = [{"name":"确认订单", "id":1}, {"name":"购买商品", "id":2}, {"name":"准备发货", "id":3}, {"name":"货物已发", "id":4}, {"name":"确认收款", "id":5}, {"name":"订单结束", "id":5}]
+	var status = [{"name":"订单状态", "id":0}, {"name":"确认订单", "id":1}, {"name":"购买商品", "id":2}, {"name":"准备发货", "id":3}, {"name":"货物已发", "id":4}, {"name":"确认收款", "id":5}, {"name":"订单结束", "id":6}]
 	
 	return status;
 }
