@@ -116,7 +116,6 @@ $(document).ready(
         	order.items = items;
         	sendJsonToDataServlet(order);
         });
-        
         loadOrders();
     }
 );
@@ -155,6 +154,8 @@ function loadOrders()
 			        		var order = orders[i];
 			        		addOrderWithData(order);
 		        		}
+		        		
+		        		calculateTotalPrice(orders);
 		        	}
 		        },
 		        error: function(jqXHR, textStatus, errorThrown)
@@ -162,6 +163,20 @@ function loadOrders()
 		        	alert("error");
 		        }
 		    });
+}
+
+function calculateTotalPrice(order)
+{
+	var totalPrice = 0.0;
+	var items = order.items;
+	var orders = order.orders;
+	for( var i = 0; i < orders.length; i++)
+	{
+		var item = orders[i];
+		totalPrice += item.totalPrice;
+	}
+	
+	return totalPrice;
 }
 
 function sendJsonToDataServlet(data)
@@ -218,7 +233,7 @@ function getOrderTitle(id, order_id)
     result += "<div class='col-sm-5'>";
     result += "<lable />";
     result += "</div>";
-    result += "<div class='col-sm-1'>总额: ";
+    result += "<div class='col-sm-1 total_price'>总额: ";
     result += "</div>";
     result += "</div>";
     result += "<br />";
@@ -227,6 +242,8 @@ function getOrderTitle(id, order_id)
 
 function getOrderTitleWithData(id, order)
 {
+	var total_price = calculateTotalPrice(order);
+	
     var result = "";
     result += "<div id='order_title' class='row'>";
     result += "<div class='col-sm-2'>";
@@ -238,7 +255,7 @@ function getOrderTitleWithData(id, order)
     result += "<div class='col-sm-5'>";
     result += "<lable />";
     result += "</div>";
-    result += "<div class='col-sm-1'>总额: ";
+    result += "<div class='col-sm-1 total_price'><span>总额: " + total_price + " 欧</span>";
     result += "</div>";
     result += "</div>";
     result += "<br />";
