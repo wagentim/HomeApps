@@ -1,4 +1,4 @@
-package cn.wagentim.homeapps;
+package cn.wagentim.homeapps.servlets;
 
 public class RedirectionServlet
 {

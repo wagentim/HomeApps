@@ -1,4 +1,4 @@
-package cn.wagentim.homeapps;
+package cn.wagentim.homeapps.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
