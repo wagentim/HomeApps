@@ -6,7 +6,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet>
 		<servlet-name>HomeApps</servlet-name>
-		<servlet-class>cn.wagentim.homeapps.HomeAppsServlet</servlet-class>
+		<servlet-class>cn.wagentim.homeapps.servlets.HomeAppsServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>HomeApps</servlet-name>
@@ -14,7 +14,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>data</servlet-name>
-		<servlet-class>cn.wagentim.homeapps.DataServlet</servlet-class>
+		<servlet-class>cn.wagentim.homeapps.servlets.DataServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>data</servlet-name>
@@ -22,7 +22,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>tele</servlet-name>
-		<servlet-class>cn.wagentim.homeapps.TelefonTarifServlet</servlet-class>
+		<servlet-class>cn.wagentim.homeapps.servlets.TelefonTarifServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>tele</servlet-name>

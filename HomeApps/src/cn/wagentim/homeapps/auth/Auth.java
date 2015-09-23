@@ -19,6 +19,7 @@ public final class Auth
     public static final int MAX_SESSION_TIME_OUT = 60 * 60 * 24;
     private static Logger logger = Logger.getLogger(Auth.class.getSimpleName());
 
+    
     public static final boolean isSessionAvailable(final HttpServletRequest request)
     {
         HttpSession session = request.getSession(false);
